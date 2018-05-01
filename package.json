@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/textactor/actors-generator.git"
+    "url": "git+https://Mitea@bitbucket.org/entitizer/actors-generator.git"
   },
   "keywords": [
     "actors-generator",
@@ -31,9 +31,9 @@
   "author": "Dumitru Cantea",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/textactor/actors-generator/issues"
+    "url": "https://Mitea@bitbucket.org/entitizer/actors-generator/issues"
   },
-  "homepage": "https://github.com/textactor/actors-generator#readme",
+  "homepage": "https://Mitea@bitbucket.org/entitizer/actors-generator#readme",
   "devDependencies": {
     "@types/node": "latest",
     "ava": "^0.23.0",

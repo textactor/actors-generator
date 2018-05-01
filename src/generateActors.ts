@@ -18,12 +18,12 @@ export function generateActors(locale: Locale) {
     const saveActor = new SaveActor(actorRepository, actorNameRepository);
 
     const processOptions: ProcessConceptsOptions = {
-        minConceptPopularity: 4,
+        minConceptPopularity: 2,
         minAbbrConceptPopularity: 5,
-        minOneWordConceptPopularity: 10,
-        minRootConceptPopularity: 5,
-        minRootAbbrConceptPopularity: 20,
-        minRootOneWordConceptPopularity: 20,
+        minOneWordConceptPopularity: 5,
+        minRootConceptPopularity: 2,
+        minRootAbbrConceptPopularity: 10,
+        minRootOneWordConceptPopularity: 10,
     };
 
     const onActor = (conceptActor: ConceptActor) => {
