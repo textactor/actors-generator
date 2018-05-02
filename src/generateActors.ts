@@ -1,12 +1,13 @@
 
 const debug = require('debug')('actors-generator');
 
-import { ProcessConcepts, ConceptActor, WikiEntityType } from "@textactor/concept-domain";
+import { ProcessConcepts, ConceptActor, WikiEntityType, WikiEntity as ConceptWikiEntity } from "@textactor/concept-domain";
 import { Locale } from "./utils";
-import { conceptRepository, conceptRootNameRepository, conceptWikiEntityRepository, wikiSearchNameRepository, wikiTitleRepository, actorRepository, actorNameRepository } from "./data";
+import { conceptRepository, conceptRootNameRepository, conceptWikiEntityRepository, wikiSearchNameRepository, wikiTitleRepository, actorRepository, actorNameRepository, wikiEntityRepository } from "./data";
 import { SaveActor, KnownActorData, ActorType } from "@textactor/actor-domain";
 import { NameHelper } from "@textactor/domain";
 import { getGenerateOptions } from './generateOptions';
+import { WikiEntity, CreatingWikiEntityData, WikiEntityHelper } from "@textactor/wikientity-domain";
 
 export function generateActors(locale: Locale) {
     const processConcepts = new ProcessConcepts(locale,
@@ -28,10 +29,35 @@ export function generateActors(locale: Locale) {
         // conceptActor.
         const actor = conceptActorToActor(conceptActor);
         debug(`+++   Adding new actor: ${actor.name}`);
-        return saveActor.execute(actor);
+        const tasks: Promise<any>[] = [saveActor.execute(actor)];
+        if (conceptActor.wikiEntity) {
+            tasks.push(saveWikiEntity(conceptActor.wikiEntity));
+        }
+        return Promise.all(tasks);
     }
 
     return processConcepts.execute(onActor, processOptions);
+}
+
+function saveWikiEntity(conceptEntity: ConceptWikiEntity): Promise<WikiEntity> {
+    const knownData: CreatingWikiEntityData = {
+        wikiDataId: conceptEntity.wikiDataId,
+        wikiPageId: conceptEntity.wikiPageId,
+        wikiPageTitle: conceptEntity.wikiPageTitle,
+        about: conceptEntity.about,
+        aliases: conceptEntity.aliases,
+        categories: conceptEntity.categories,
+        data: conceptEntity.data,
+        description: conceptEntity.description,
+        lang: conceptEntity.lang,
+        name: conceptEntity.name,
+        type: conceptEntity.type,
+        types: conceptEntity.types,
+    };
+
+    const entity = WikiEntityHelper.create(knownData);
+
+    return wikiEntityRepository.createOrUpdate(entity);
 }
 
 function isValidActor(conceptActor: ConceptActor) {
