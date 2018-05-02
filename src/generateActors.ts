@@ -1,36 +1,31 @@
 
 const debug = require('debug')('actors-generator');
 
-import { ProcessConcepts, ProcessConceptsOptions, ConceptActor, WikiEntityType } from "@textactor/concept-domain";
+import { ProcessConcepts, ConceptActor, WikiEntityType } from "@textactor/concept-domain";
 import { Locale } from "./utils";
-import { conceptRepository, conceptRootNameRepository, wikiEntityRepository, wikiSearchNameRepository, wikiTitleRepository, actorRepository, actorNameRepository } from "./data";
+import { conceptRepository, conceptRootNameRepository, conceptWikiEntityRepository, wikiSearchNameRepository, wikiTitleRepository, actorRepository, actorNameRepository } from "./data";
 import { SaveActor, KnownActorData, ActorType } from "@textactor/actor-domain";
 import { NameHelper } from "@textactor/domain";
+import { getGenerateOptions } from './generateOptions';
 
 export function generateActors(locale: Locale) {
     const processConcepts = new ProcessConcepts(locale,
         conceptRepository,
         conceptRootNameRepository,
-        wikiEntityRepository,
+        conceptWikiEntityRepository,
         wikiSearchNameRepository,
         wikiTitleRepository);
 
     const saveActor = new SaveActor(actorRepository, actorNameRepository);
 
-    const processOptions: ProcessConceptsOptions = {
-        minConceptPopularity: 2,
-        minAbbrConceptPopularity: 5,
-        minOneWordConceptPopularity: 5,
-        minRootConceptPopularity: 2,
-        minRootAbbrConceptPopularity: 10,
-        minRootOneWordConceptPopularity: 10,
-    };
+    const processOptions = getGenerateOptions(locale.country);
 
     const onActor = (conceptActor: ConceptActor) => {
         if (!isValidActor(conceptActor)) {
             debug(`---   Invalid actor: ${conceptActor.name}, wiki=${!!conceptActor.wikiEntity}`);
             return;
         }
+        // conceptActor.
         const actor = conceptActorToActor(conceptActor);
         debug(`+++   Adding new actor: ${actor.name}`);
         return saveActor.execute(actor);
