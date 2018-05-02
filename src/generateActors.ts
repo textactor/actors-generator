@@ -1,13 +1,13 @@
 
 const debug = require('debug')('actors-generator');
 
-import { ProcessConcepts, ConceptActor, WikiEntityType, WikiEntity as ConceptWikiEntity } from "@textactor/concept-domain";
+import { ProcessConcepts, ConceptActor, WikiEntityType as ConceptWikiEntityType, WikiEntity as ConceptWikiEntity } from "@textactor/concept-domain";
 import { Locale } from "./utils";
 import { conceptRepository, conceptRootNameRepository, conceptWikiEntityRepository, wikiSearchNameRepository, wikiTitleRepository, actorRepository, actorNameRepository, wikiEntityRepository } from "./data";
 import { SaveActor, KnownActorData, ActorType } from "@textactor/actor-domain";
 import { NameHelper } from "@textactor/domain";
 import { getGenerateOptions } from './generateOptions';
-import { WikiEntity, CreatingWikiEntityData, WikiEntityHelper } from "@textactor/wikientity-domain";
+import { WikiEntity, CreatingWikiEntityData, WikiEntityHelper, WikiEntityType } from "@textactor/wikientity-domain";
 
 export function generateActors(locale: Locale) {
     const processConcepts = new ProcessConcepts(locale,
@@ -51,7 +51,7 @@ function saveWikiEntity(conceptEntity: ConceptWikiEntity): Promise<WikiEntity> {
         description: conceptEntity.description,
         lang: conceptEntity.lang,
         name: conceptEntity.name,
-        type: conceptEntity.type,
+        type: conceptWikiTypeToWikiType(conceptEntity.type),
         types: conceptEntity.types,
     };
 
@@ -87,7 +87,7 @@ function conceptActorToActor(conceptActor: ConceptActor) {
         names: conceptActor.names.map(name => ({ name })),
         country: conceptActor.country,
         lang: conceptActor.lang,
-        type: conceptActor.wikiEntity && wikiTypeToActorType(conceptActor.wikiEntity.type),
+        type: conceptActor.wikiEntity && conceptWikiTypeToActorType(conceptActor.wikiEntity.type),
     };
 
     if (conceptActor.wikiEntity) {
@@ -103,12 +103,22 @@ function conceptActorToActor(conceptActor: ConceptActor) {
     return actorData;
 }
 
-function wikiTypeToActorType(wikiType: WikiEntityType): ActorType {
+function conceptWikiTypeToWikiType(wikiType: ConceptWikiEntityType): WikiEntityType {
     switch (wikiType) {
-        case WikiEntityType.EVENT: return ActorType.EVENT;
-        case WikiEntityType.ORG: return ActorType.ORG;
-        case WikiEntityType.PERSON: return ActorType.PERSON;
-        case WikiEntityType.PLACE: return ActorType.PLACE;
-        case WikiEntityType.PRODUCT: return ActorType.PRODUCT;
+        case ConceptWikiEntityType.EVENT: return WikiEntityType.EVENT;
+        case ConceptWikiEntityType.ORG: return WikiEntityType.ORG;
+        case ConceptWikiEntityType.PERSON: return WikiEntityType.PERSON;
+        case ConceptWikiEntityType.PLACE: return WikiEntityType.PLACE;
+        case ConceptWikiEntityType.PRODUCT: return WikiEntityType.PRODUCT;
+    }
+}
+
+function conceptWikiTypeToActorType(wikiType: ConceptWikiEntityType): ActorType {
+    switch (wikiType) {
+        case ConceptWikiEntityType.EVENT: return ActorType.EVENT;
+        case ConceptWikiEntityType.ORG: return ActorType.ORG;
+        case ConceptWikiEntityType.PERSON: return ActorType.PERSON;
+        case ConceptWikiEntityType.PLACE: return ActorType.PLACE;
+        case ConceptWikiEntityType.PRODUCT: return ActorType.PRODUCT;
     }
 }

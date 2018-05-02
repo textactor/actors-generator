@@ -33,8 +33,8 @@ export class DBConceptEnumerator implements IConceptEnumerator {
     static createFromEnv(locale: Locale) {
         const startDate = new Date();
         const endDate = new Date();
-        const PAST_DAYS = typeof process.env.PAST_DAYS === 'string' ? parseInt(process.env.PAST_DAYS) : 4;
-        const PERIOD = typeof process.env.PERIOD === 'string' ? parseInt(process.env.PERIOD) : 4;
+        const PAST_DAYS = !!process.env.PAST_DAYS ? parseInt(process.env.PAST_DAYS) : 4;
+        const PERIOD = !!process.env.PERIOD ? parseInt(process.env.PERIOD) : 4;
         startDate.setDate(startDate.getDate() - PAST_DAYS);
         endDate.setDate(startDate.getDate() + PERIOD);
 

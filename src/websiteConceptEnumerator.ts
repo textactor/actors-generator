@@ -47,6 +47,7 @@ export class WebsiteConceptEnumerator implements IConceptEnumerator {
             debug(`next try`);
             return this.getNext(++tries);
         }
+        return article;
     }
 }
 
