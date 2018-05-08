@@ -8,6 +8,7 @@ import { SaveActor, KnownActorData, ActorType } from "@textactor/actor-domain";
 import { NameHelper } from "@textactor/domain";
 import { getGenerateOptions } from './generateOptions';
 import { WikiEntity, CreatingWikiEntityData, WikiEntityHelper, WikiEntityType } from "@textactor/wikientity-domain";
+import { CountryTagsService } from "./countryTagsService";
 
 export function generateActors(locale: Locale) {
     const processConcepts = new ProcessConcepts(locale,
@@ -15,7 +16,8 @@ export function generateActors(locale: Locale) {
         conceptRootNameRepository,
         conceptWikiEntityRepository,
         wikiSearchNameRepository,
-        wikiTitleRepository);
+        wikiTitleRepository,
+        new CountryTagsService());
 
     const saveActor = new SaveActor(actorRepository, actorNameRepository);
 
