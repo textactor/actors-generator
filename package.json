@@ -15,7 +15,8 @@
     "postversion": "git push --follow-tags",
     "prepublishOnly": "yarn run tsc && yarn run clean-test-code",
     "clean": "rimraf ./lib && rimraf ./types",
-    "clean-test-code": "rimraf ./lib/**/*.test.js && rimraf ./types/**/*.test.d.ts"
+    "clean-test-code": "rimraf ./lib/**/*.test.js && rimraf ./types/**/*.test.d.ts",
+    "dev": "sh dev.sh"
   },
   "engines": {
     "node": ">=4.0.0"
@@ -42,7 +43,6 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "@textactor/domain": "^0.1.4",
     "ascrape": "^0.2.0",
     "ournet.data.news": "^0.3.6"
   }

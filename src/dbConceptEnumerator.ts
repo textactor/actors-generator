@@ -32,15 +32,24 @@ export class DBConceptEnumerator implements IConceptEnumerator {
 
     static createFromEnv(locale: Locale) {
         const startDate = new Date();
-        const endDate = new Date();
-        const PAST_DAYS = !!process.env.PAST_DAYS ? parseInt(process.env.PAST_DAYS) : 4;
-        const PERIOD = !!process.env.PERIOD ? parseInt(process.env.PERIOD) : 4;
+        const PAST_DAYS = getNumber(process.env.PAST_DAYS, 4);
+        const PERIOD = getNumber(process.env.PERIOD, 4);
+        debug('PAST_DAYS=', PAST_DAYS)
+        debug('PERIOD=', PERIOD)
         startDate.setDate(startDate.getDate() - PAST_DAYS);
-        endDate.setDate(startDate.getDate() + PERIOD);
+        const endDate = new Date(startDate.getTime());
+        endDate.setDate(endDate.getDate() + PERIOD);
 
         debug('startDate=', startDate)
         debug('endDate=', endDate)
 
         return new DBConceptEnumerator(locale, { startDate, endDate });
     }
+}
+
+function getNumber(s: string, def: number): number {
+    if (s && Number.isSafeInteger(parseInt(s))) {
+        return parseInt(s);
+    }
+    return def;
 }

@@ -96,7 +96,7 @@ function conceptActorToActor(conceptActor: ConceptActor) {
             description: conceptActor.wikiEntity.description,
             name: conceptActor.wikiEntity.name,
             wikiPageTitle: conceptActor.wikiEntity.wikiPageTitle,
-            countryCode: conceptActor.wikiEntity.countryCode,
+            // countryCode: conceptActor.wikiEntity.countryCode,
         };
     }
 
@@ -110,6 +110,7 @@ function conceptWikiTypeToWikiType(wikiType: ConceptWikiEntityType): WikiEntityT
         case ConceptWikiEntityType.PERSON: return WikiEntityType.PERSON;
         case ConceptWikiEntityType.PLACE: return WikiEntityType.PLACE;
         case ConceptWikiEntityType.PRODUCT: return WikiEntityType.PRODUCT;
+        case ConceptWikiEntityType.WORK: return WikiEntityType.WORK;
     }
 }
 
@@ -120,5 +121,6 @@ function conceptWikiTypeToActorType(wikiType: ConceptWikiEntityType): ActorType 
         case ConceptWikiEntityType.PERSON: return ActorType.PERSON;
         case ConceptWikiEntityType.PLACE: return ActorType.PLACE;
         case ConceptWikiEntityType.PRODUCT: return ActorType.PRODUCT;
+        case ConceptWikiEntityType.WORK: return ActorType.WORK;
     }
 }

@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 
-import { delay, parseLocale } from "./utils";
+import { parseLocale } from "./utils";
 
 const locale = parseLocale(process.env.LOCALE);
 
@@ -18,12 +18,7 @@ async function start() {
     debug(`START ${locale.lang}-${locale.country}`);
     await initData();
 
-    return generateActors(locale)
-        .catch(e => {
-            console.error(e);
-            return delay(1000 * 5).then(() => generateActors(locale));
-        })
-        .then(() => delay(1000 * 5));
+    return generateActors(locale);
 }
 
 start()

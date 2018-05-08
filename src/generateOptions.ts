@@ -19,7 +19,7 @@ const OPTIONS: { [country: string]: ProcessConceptsOptions } =
             minConceptPopularity: 2,
             minAbbrConceptPopularity: 5,
             minOneWordConceptPopularity: 5,
-            minRootConceptPopularity: 5,
+            minRootConceptPopularity: 2,
             minRootAbbrConceptPopularity: 10,
             minRootOneWordConceptPopularity: 10,
         },
