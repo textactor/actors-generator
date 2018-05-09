@@ -1,17 +1,17 @@
 
 const debug = require('debug')('actors-generator');
 
-import { ProcessConcepts, ConceptActor, WikiEntityType as ConceptWikiEntityType, WikiEntity as ConceptWikiEntity } from "@textactor/concept-domain";
-import { Locale } from "./utils";
-import { conceptRepository, conceptRootNameRepository, conceptWikiEntityRepository, wikiSearchNameRepository, wikiTitleRepository, actorRepository, actorNameRepository, wikiEntityRepository } from "./data";
+import { ProcessConcepts, ConceptActor, WikiEntityType as ConceptWikiEntityType, WikiEntity as ConceptWikiEntity, ConceptContainer } from "@textactor/concept-domain";
+import { conceptRepository, conceptRootNameRepository, conceptWikiEntityRepository, wikiSearchNameRepository, wikiTitleRepository, actorRepository, actorNameRepository, wikiEntityRepository, containerRepository } from "./data";
 import { SaveActor, KnownActorData, ActorType } from "@textactor/actor-domain";
 import { NameHelper } from "@textactor/domain";
 import { getGenerateOptions } from './generateOptions';
 import { WikiEntity, CreatingWikiEntityData, WikiEntityHelper, WikiEntityType } from "@textactor/wikientity-domain";
 import { CountryTagsService } from "./countryTagsService";
 
-export function generateActors(locale: Locale) {
-    const processConcepts = new ProcessConcepts(locale,
+export function generateActors(container: ConceptContainer) {
+    const processConcepts = new ProcessConcepts(container,
+        containerRepository,
         conceptRepository,
         conceptRootNameRepository,
         conceptWikiEntityRepository,
@@ -21,7 +21,7 @@ export function generateActors(locale: Locale) {
 
     const saveActor = new SaveActor(actorRepository, actorNameRepository);
 
-    const processOptions = getGenerateOptions(locale.country);
+    const processOptions = getGenerateOptions(container.country);
 
     const onActor = (conceptActor: ConceptActor) => {
         if (!isValidActor(conceptActor)) {

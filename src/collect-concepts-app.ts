@@ -14,16 +14,24 @@ const sourceName = process.env.SOURCE;
 const debug = require('debug')('actors-generator');
 
 import { collectConcepts } from "./collectConcepts";
-import { initData, close } from "./data";
+import { initData, close, containerRepository } from "./data";
 import { WebsiteConceptEnumerator } from './websiteConceptEnumerator';
 import { DBConceptEnumerator } from './dbConceptEnumerator';
 import { IConceptEnumerator } from './conceptEnumerator';
+import { ConceptContainerHelper } from "@textactor/concept-domain";
 
 async function start() {
     debug(`START ${locale.lang}-${locale.country}`);
     await initData();
     const enumerator = createEnumerator();
-    return collectConcepts(locale, enumerator).then(() => delay(1000 * 5));
+    const container = await containerRepository.create(ConceptContainerHelper.build({
+        name: `actors-generator-app`,
+        uniqueName: `actors-generator-app-${Math.round(Date.now() / 1000)}`,
+        lang: locale.lang,
+        country: locale.country,
+        ownerId: 'textactor-gen-app',
+    }));
+    return collectConcepts(container, enumerator).then(() => delay(1000 * 5));
 }
 
 function createEnumerator(): IConceptEnumerator {

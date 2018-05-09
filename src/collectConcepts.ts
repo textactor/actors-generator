@@ -1,14 +1,13 @@
 
 const debug = require('debug')('actors-generator');
 
-import { Locale } from "./utils";
 import { ConceptCollector } from '@textactor/concept-collector';
-import { PushContextConcepts } from '@textactor/concept-domain';
-import { conceptRepository, conceptRootNameRepository } from "./data";
+import { PushContextConcepts, ConceptContainer, ConceptContainerStatus } from '@textactor/concept-domain';
+import { conceptRepository, conceptRootNameRepository, containerRepository } from "./data";
 import { seriesPromise } from '@textactor/domain';
 import { IConceptEnumerator } from "./conceptEnumerator";
 
-export function collectConcepts(locale: Locale, enumerator: IConceptEnumerator) {
+export async function collectConcepts(container: ConceptContainer, enumerator: IConceptEnumerator) {
     const collector = new ConceptCollector(new PushContextConcepts(conceptRepository, conceptRootNameRepository));
 
     let countTexts = 0;
@@ -24,12 +23,27 @@ export function collectConcepts(locale: Locale, enumerator: IConceptEnumerator) 
             }
             return seriesPromise(texts, text => collector.execute({
                 text,
-                lang: locale.lang,
-                country: locale.country,
+                lang: container.lang,
+                country: container.country,
+                containerId: container.id,
             }))
                 .then(() => start());
         });
     }
 
-    return start();
+    await containerRepository.update({ item: { id: container.id, status: ConceptContainerStatus.COLLECTING } });
+
+    try {
+        await start();
+    } catch (e) {
+        const error = e.message;
+        await containerRepository.update({
+            item: {
+                id: container.id, status: ConceptContainerStatus.COLLECT_ERROR,
+                lastError: error
+            }
+        });
+        return Promise.reject(e);
+    }
+    await containerRepository.update({ item: { id: container.id, status: ConceptContainerStatus.COLLECT_DONE } });
 }

@@ -11,6 +11,8 @@ import {
     WikiEntityModel as ConceptWikiEntityModel,
     WikiTitleRepository,
     WikiEntityRepository as ConceptWikiEntityRepository,
+    ConceptContainerModel,
+    ConceptContainerRepository,
 } from '@textactor/concept-data';
 
 import {
@@ -34,8 +36,9 @@ export const conceptRootNameRepository = new ConceptRootNameRepository(new Conce
 export const wikiSearchNameRepository = new WikiSearchNameRepository(new WikiSearchNameModel(conceptConnection));
 export const wikiTitleRepository = new WikiTitleRepository(new WikiTitleModel(conceptConnection));
 export const conceptWikiEntityRepository = new ConceptWikiEntityRepository(new ConceptWikiEntityModel(conceptConnection));
-export const wikiEntityRepository = new WikiEntityRepository(new WikiEntityModel());
+export const containerRepository = new ConceptContainerRepository(new ConceptContainerModel(conceptConnection));
 
+export const wikiEntityRepository = new WikiEntityRepository(new WikiEntityModel());
 export const actorNameRepository = new ActorNameRepository(new ActorNameModel());
 export const actorRepository = new ActorRepository(new ActorModel());
 
