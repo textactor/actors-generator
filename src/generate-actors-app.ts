@@ -20,7 +20,13 @@ async function start() {
     debug(`START ${locale.lang}-${locale.country}`);
     await initData();
 
-    const containers = await containerRepository.getByStatus(locale, [ConceptContainerStatus.COLLECT_DONE]);
+    const containers = await containerRepository.getByStatus(locale,
+        [
+            ConceptContainerStatus.COLLECT_DONE,
+            ConceptContainerStatus.COLLECT_ERROR,
+            ConceptContainerStatus.GENERATE_ERROR,
+            ConceptContainerStatus.GENERATING,
+        ]);
 
     return seriesPromise(containers, async container => {
         container = await containerRepository.getById(container.id);

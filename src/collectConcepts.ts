@@ -6,9 +6,11 @@ import { PushContextConcepts, ConceptContainer, ConceptContainerStatus } from '@
 import { conceptRepository, conceptRootNameRepository, containerRepository } from "./data";
 import { seriesPromise } from '@textactor/domain';
 import { IConceptEnumerator } from "./conceptEnumerator";
+import { KnownNameService } from '@textactor/known-names';
 
 export async function collectConcepts(container: ConceptContainer, enumerator: IConceptEnumerator) {
-    const collector = new ConceptCollector(new PushContextConcepts(conceptRepository, conceptRootNameRepository));
+    const collector = new ConceptCollector(new PushContextConcepts(conceptRepository, conceptRootNameRepository),
+        new KnownNameService());
 
     let countTexts = 0;
 

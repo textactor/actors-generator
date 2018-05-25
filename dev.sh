@@ -9,6 +9,7 @@ yarn remove @textactor/actor-domain
 yarn remove @textactor/concept-domain
 yarn remove @textactor/actor-data
 yarn remove @textactor/concept-data
+yarn remove @textactor/known-names
 
 yarn link @textactor/domain
 yarn link @textactor/wikientity-domain
@@ -19,5 +20,6 @@ yarn link @textactor/actor-domain
 yarn link @textactor/concept-domain
 yarn link @textactor/actor-data
 yarn link @textactor/concept-data
+yarn link @textactor/known-names
 
 tsc

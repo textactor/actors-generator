@@ -29,7 +29,7 @@ async function start() {
         uniqueName: `actors-generator-app-${Math.round(Date.now() / 1000)}`,
         lang: locale.lang,
         country: locale.country,
-        ownerId: 'textactor-gen-app',
+        ownerId: 'ournet',
     }));
     return collectConcepts(container, enumerator).then(() => delay(1000 * 5));
 }

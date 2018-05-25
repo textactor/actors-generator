@@ -4,8 +4,9 @@
   "description": "Actors generator app",
   "private": true,
   "scripts": {
-    "collect": "yarn run tsc && node ./lib/collect-concepts-app.js",
-    "generate": "yarn run tsc && node ./lib/generate-actors-app.js",
+    "collect": "node ./lib/collect-concepts-app.js",
+    "collect-from-queries": "node ./lib/collect-concepts-from-queries-app.js",
+    "generate": "node ./lib/generate-actors-app.js",
     "pretest": "yarn run clean && yarn run tsc",
     "test": "ava --no-cache --verbose lib/**/*.test.js",
     "posttest": "yarn run clean-test-code",
@@ -37,6 +38,7 @@
   "homepage": "https://Mitea@bitbucket.org/entitizer/actors-generator#readme",
   "devDependencies": {
     "@types/node": "latest",
+    "@types/node-fetch": "^1.6.9",
     "ava": "^0.23.0",
     "dotenv": "^5.0.1",
     "rimraf": "^2.6.2",
@@ -44,6 +46,7 @@
   },
   "dependencies": {
     "ascrape": "^0.2.0",
+    "node-fetch": "^2.1.2",
     "ournet.data.news": "^0.3.6"
   }
 }
