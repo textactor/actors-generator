@@ -11,7 +11,7 @@ if (!locale) {
 
 const sourceName = process.env.SOURCE;
 
-const debug = require('debug')('actors-generator');
+import logger from './logger';
 
 import { collectConcepts } from "./collectConcepts";
 import { initData, close, containerRepository } from "./data";
@@ -21,7 +21,7 @@ import { IConceptEnumerator } from './conceptEnumerator';
 import { ConceptContainerHelper } from "@textactor/concept-domain";
 
 async function start() {
-    debug(`START ${locale.lang}-${locale.country}`);
+    logger.warn(`START collect-concepts ${locale.lang}-${locale.country}`);
     await initData();
     const enumerator = createEnumerator();
     const container = await containerRepository.create(ConceptContainerHelper.build({
@@ -43,6 +43,6 @@ function createEnumerator(): IConceptEnumerator {
 
 start()
     .then(() => console.log('END'))
-    .catch(e => console.error(e))
+    .catch(e => logger.error(e))
     .then(() => close())
     .then(() => process.exit());

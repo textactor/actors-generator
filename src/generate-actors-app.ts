@@ -9,7 +9,7 @@ if (!locale) {
     throw new Error('LOCALE env is required!');
 }
 
-const debug = require('debug')('actors-generator');
+import logger from './logger';
 
 import { initData, close, containerRepository } from "./data";
 import { generateActors } from './generateActors';
@@ -17,7 +17,7 @@ import { ConceptContainerStatus, ConceptContainerHelper } from "@textactor/conce
 import { seriesPromise } from "@textactor/domain";
 
 async function start() {
-    debug(`START ${locale.lang}-${locale.country}`);
+    logger.warn(`START generate-actors ${locale.lang}-${locale.country}`);
     await initData();
 
     const containers = await containerRepository.getByStatus(locale,
@@ -31,7 +31,7 @@ async function start() {
     return seriesPromise(containers, async container => {
         container = await containerRepository.getById(container.id);
         if (ConceptContainerHelper.canStartGenerate(container.status)) {
-            debug(`Start processing container: ${container.uniqueName}: ${container.status}`);
+            logger.warn(`Start processing container: ${container.uniqueName}: ${container.status}`);
             return generateActors(container);
         }
     });
@@ -39,6 +39,6 @@ async function start() {
 
 start()
     .then(() => console.log('END'))
-    .catch(e => console.error(e))
+    .catch(e => logger.error(e))
     .then(() => close())
     .then(() => process.exit());

@@ -7,6 +7,7 @@ import { conceptRepository, conceptRootNameRepository, containerRepository } fro
 import { seriesPromise } from '@textactor/domain';
 import { IConceptEnumerator } from "./conceptEnumerator";
 import { KnownNameService } from '@textactor/known-names';
+import logger from './logger';
 
 export async function collectConcepts(container: ConceptContainer, enumerator: IConceptEnumerator) {
     const collector = new ConceptCollector(new PushContextConcepts(conceptRepository, conceptRootNameRepository),
@@ -38,6 +39,7 @@ export async function collectConcepts(container: ConceptContainer, enumerator: I
     try {
         await start();
     } catch (e) {
+        logger.error(e);
         const error = e.message;
         await containerRepository.update({
             item: {

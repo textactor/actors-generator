@@ -8,6 +8,7 @@ import { queryWikidata } from './queryWikidata';
 import { isWikidataId } from './utils';
 import { readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
+import logger from './logger';
 
 export async function collectConceptsFromQueries(locale: Locale) {
     let dir = join(__dirname, '..', 'data', 'queries', locale.lang);
@@ -32,7 +33,7 @@ export async function collectConceptsFromQueries(locale: Locale) {
 }
 
 async function collectConceptsByQuery(map: Map<string, boolean>, container: ConceptContainer, query: string, file: string) {
-    debug(`processing file: ${file}`);
+    logger.warn(`processing file: ${file}`);
     let items = await queryWikidata(query);
 
     items = items.filter(item => item.title
@@ -63,6 +64,7 @@ async function collectConceptsByQuery(map: Map<string, boolean>, container: Conc
             await conceptRepository.create(concept);
         } catch (e) {
             debug(`error: ${e.message}`);
+            logger.error(e);
         }
     });
 

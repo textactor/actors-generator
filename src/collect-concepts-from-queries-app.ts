@@ -9,13 +9,13 @@ if (!locale) {
     throw new Error('LOCALE env is required!');
 }
 
-const debug = require('debug')('actors-generator');
+import logger from './logger';
 
 import { initData, close } from "./data";
 import { collectConceptsFromQueries } from "./collectConceptsFromQueries";
 
 async function start() {
-    debug(`START ${locale.lang}-${locale.country}`);
+    logger.warn(`START collect-concepts-from-queries ${locale.lang}-${locale.country}`);
     await initData();
 
     return collectConceptsFromQueries(locale).then(() => delay(1000 * 5));
@@ -23,6 +23,6 @@ async function start() {
 
 start()
     .then(() => console.log('END'))
-    .catch(e => console.error(e))
+    .catch(e => logger.error(e))
     .then(() => close())
     .then(() => process.exit());
