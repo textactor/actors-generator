@@ -22,4 +22,4 @@ yarn link @textactor/actor-data
 yarn link @textactor/concept-data
 yarn link @textactor/known-names
 
-tsc
+yarn tsc
