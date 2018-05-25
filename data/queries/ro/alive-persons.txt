@@ -1,0 +1,10 @@
+PREFIX schema: <http://schema.org/>
+
+SELECT ?item ?itemTitle WHERE {
+  ?item wdt:P31 wd:Q5.
+  ?item wdt:P569 ?birthdate.
+  ?sitelink schema:isPartOf <https://ro.wikipedia.org/>;schema:about ?item;schema:name ?itemTitle.
+
+  FILTER (year(?birthdate) > 1930)
+  FILTER NOT EXISTS{ ?item wdt:P570 ?date }
+}

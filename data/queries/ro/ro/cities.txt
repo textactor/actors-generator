@@ -1,0 +1,19 @@
+PREFIX schema: <http://schema.org/>
+
+SELECT ?item ?itemTitle WHERE {
+  ?item wdt:P31 wd:Q515.
+  { ?item wdt:P17 wd:Q217. }
+  UNION
+  { ?item wdt:P17 wd:Q218. }
+  UNION
+  { ?item wdt:P17 wd:Q159. }
+  UNION
+  { ?item wdt:P17 wd:Q212. }
+  UNION
+  { ?item wdt:P17 wd:Q219. }
+  UNION
+  { ?item wdt:P17 wd:Q28. }
+  UNION
+  { ?item wdt:P17 wd:Q403. }
+  ?sitelink schema:isPartOf <https://ro.wikipedia.org/>;schema:about ?item;schema:name ?itemTitle.
+}
