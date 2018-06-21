@@ -60,29 +60,28 @@
     "@textactor/domain" "^0.1.5"
     shortid "^2.2.8"
 
-"@textactor/concept-collector@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@textactor/concept-collector/-/concept-collector-0.1.0.tgz#f16284babe0d361c5ec6e374b4da8f68414768a0"
+"@textactor/concept-collector@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@textactor/concept-collector/-/concept-collector-0.1.1.tgz#672415b2db4ce0e3aa52688317de0d77a5e9e648"
   dependencies:
-    "@textactor/concept-domain" "^0.1.0"
+    "@textactor/concept-domain" "^0.1.1"
     "@textactor/domain" "^0.1.5"
     concepts-parser "^1.3.1"
 
-"@textactor/concept-data@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@textactor/concept-data/-/concept-data-0.1.1.tgz#84da9663bbbdc215aa17d97816bd3957ef2aff04"
+"@textactor/concept-data@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@textactor/concept-data/-/concept-data-0.1.2.tgz#87f2fa88169307017e9139b995fd601f54b46e1c"
   dependencies:
-    "@textactor/concept-domain" "^0.1.0"
+    "@textactor/concept-domain" "^0.1.1"
     "@textactor/domain" "^0.1.5"
     mongoose "^5.0.15"
 
-"@textactor/concept-domain@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@textactor/concept-domain/-/concept-domain-0.1.0.tgz#9080f24b56e4eeef6f20c6d9f2fd223199e724d8"
+"@textactor/concept-domain@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@textactor/concept-domain/-/concept-domain-0.1.1.tgz#8bd8e556cdd52ccf159080ecb74e3d9d9004bf92"
   dependencies:
     "@textactor/domain" "^0.1.5"
     entity-finder "^0.5.2"
-    is-abbr-of "^0.1.1"
     ms "^2.1.1"
     partial-name "^0.1.4"
     root-name "^0.1.8"
@@ -281,6 +280,12 @@ async@2.1.4:
   dependencies:
     lodash "^4.14.0"
 
+async@2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
+  dependencies:
+    lodash "^4.17.10"
+
 async@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/async/-/async-1.0.0.tgz#f8fc04ca3a13784ade9e1641af98578cfbd647a9"
@@ -393,8 +398,8 @@ ava@^0.23.0:
     update-notifier "^2.3.0"
 
 aws-sdk@^2.186.x:
-  version "2.246.1"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.246.1.tgz#da24e62e69a4aaf8c5a98ac1ebbac9d24e601bc9"
+  version "2.260.1"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.260.1.tgz#58d85704b200a6d0f42f08e0aee8f4da23485dd0"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -799,9 +804,13 @@ braces@^1.8.2:
     preserve "^0.2.0"
     repeat-element "^1.1.2"
 
-bson@~1.0.4, bson@~1.0.5:
+bson@~1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.6.tgz#444db59ddd4c24f0cb063aabdc5c8c7b0ceca912"
+
+bson@~1.0.5:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.9.tgz#12319f8323b1254739b7c6bef8d3e89ae05a2f57"
 
 buf-compare@^1.0.0:
   version "1.0.1"
@@ -1266,13 +1275,13 @@ duplexer3@^0.1.4:
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
 
 dynamodb@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/dynamodb/-/dynamodb-1.1.1.tgz#3d1ba297356380c3065dc3dcd0df72d70a12306f"
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/dynamodb/-/dynamodb-1.1.2.tgz#541de8c5ef36a5822b40cbdc270b90e899315e94"
   dependencies:
     async "1.5.x"
     aws-sdk "^2.186.x"
     bunyan "1.5.x"
-    joi "10.x.x"
+    joi "10.6.x"
     lodash "4.x.x"
     node-uuid "1.4.x"
 
@@ -1822,8 +1831,8 @@ ieee754@1.1.8:
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
 ieee754@^1.1.4:
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.11.tgz#c16384ffe00f5b7835824e67b6f2bd44a5229455"
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.12.tgz#50bf24e5b9c8bb98af4964c941cdb0918da7b60b"
 
 ignore-by-default@^1.0.0:
   version "1.0.1"
@@ -1878,10 +1887,6 @@ invariant@^2.2.2:
 irregular-plurals@^1.0.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/irregular-plurals/-/irregular-plurals-1.4.0.tgz#2ca9b033651111855412f16be5d77c62a458a766"
-
-is-abbr-of@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/is-abbr-of/-/is-abbr-of-0.1.1.tgz#3130168a4296fc47702b64eb57bc187e007f9a13"
 
 is-arrayish@^0.2.1:
   version "0.2.1"
@@ -2090,7 +2095,7 @@ jmespath@0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
 
-joi@10.x.x:
+joi@10.6.x:
   version "10.6.0"
   resolved "https://registry.yarnpkg.com/joi/-/joi-10.6.0.tgz#52587f02d52b8b75cdb0c74f0b164a191a0e1fc2"
   dependencies:
@@ -2100,8 +2105,8 @@ joi@10.x.x:
     topo "2.x.x"
 
 joi@^13.2.0:
-  version "13.3.0"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-13.3.0.tgz#4defd4333b539c5d10e444ab44f5a5583480f17c"
+  version "13.4.0"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-13.4.0.tgz#afc359ee3d8bc5f9b9ba6cdc31b46d44af14cecc"
   dependencies:
     hoek "5.x.x"
     isemail "3.x.x"
@@ -2181,9 +2186,9 @@ kareem@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-1.5.0.tgz#e3e4101d9dcfde299769daf4b4db64d895d17448"
 
-kareem@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.1.0.tgz#d63197b57311830e4ceb3f34431f22f2de826a03"
+kareem@2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.2.1.tgz#9950809415aa3cde62ab43b4f7b919d99816e015"
 
 kind-of@^3.0.2:
   version "3.2.2"
@@ -2324,7 +2329,7 @@ lodash.some@^4.4.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.some/-/lodash.some-4.6.0.tgz#1bb9f314ef6b8baded13b549169b2a945eb68e4d"
 
-lodash@4.x.x, lodash@^4.0.0:
+lodash@4.x.x, lodash@^4.0.0, lodash@^4.17.10:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -2478,9 +2483,9 @@ mongodb-core@2.1.18:
     bson "~1.0.4"
     require_optional "~1.0.0"
 
-mongodb-core@3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.8.tgz#8d401f4eab6056c0d874a3d5844a4844f761d4d7"
+mongodb-core@3.0.9:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.9.tgz#8327410c88811013fb3e4ac7c4c670f324349be1"
   dependencies:
     bson "~1.0.4"
     require_optional "^1.0.1"
@@ -2493,11 +2498,11 @@ mongodb@2.2.34:
     mongodb-core "2.1.18"
     readable-stream "2.2.7"
 
-mongodb@3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.0.8.tgz#2c1daecac9a0ec2de2f2aea4dc97d76ae70f8951"
+mongodb@3.0.10:
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.0.10.tgz#f948cb9595adcbfcad7444f6b24a040b653b23e8"
   dependencies:
-    mongodb-core "3.0.8"
+    mongodb-core "3.0.9"
 
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
@@ -2522,14 +2527,14 @@ mongoose@^4.0.2:
     sliced "1.0.1"
 
 mongoose@^5.0.15:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.1.2.tgz#f0cf29f8e5b43b7ec0abb279f831b9ddfd266380"
+  version "5.1.6"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.1.6.tgz#af92762c1e0317c897435594e83d6a5952873a0e"
   dependencies:
-    async "2.1.4"
+    async "2.6.1"
     bson "~1.0.5"
-    kareem "2.1.0"
+    kareem "2.2.1"
     lodash.get "4.4.2"
-    mongodb "3.0.8"
+    mongodb "3.0.10"
     mongoose-legacy-pluralize "1.0.2"
     mpath "0.4.1"
     mquery "3.0.0"

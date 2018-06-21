@@ -22,7 +22,7 @@ async function start() {
 }
 
 start()
-    .then(() => console.log('END'))
+    .then(() => logger.warn('END'))
     .catch(e => logger.error(e))
     .then(() => close())
     .then(() => process.exit());
