@@ -18,7 +18,7 @@ async function start() {
     logger.warn(`START collect-concepts-from-queries ${locale.lang}-${locale.country}`);
     await initData();
 
-    return collectConceptsFromQueries(locale).then(() => delay(1000 * 5));
+    return collectConceptsFromQueries(locale, process.env.FILE).then(() => delay(1000 * 5));
 }
 
 start()

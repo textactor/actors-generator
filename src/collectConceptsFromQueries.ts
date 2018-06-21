@@ -10,12 +10,17 @@ import { readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
 import logger from './logger';
 
-export async function collectConceptsFromQueries(locale: Locale) {
-    let dir = join(__dirname, '..', 'data', 'queries', locale.lang);
-    let files: string[] = readdirSync(dir, 'utf8').map(file => join(dir, file));
-    dir = join(dir, locale.country);
-    files = files.concat(readdirSync(dir, 'utf8').map(file => join(dir, file)));
-    files = files.filter(file => file.endsWith('.txt'));
+export async function collectConceptsFromQueries(locale: Locale, file?: string) {
+    let files: string[]
+    if (file) {
+        files = [file];
+    } else {
+        let dir = join(__dirname, '..', 'data', 'queries', locale.lang);
+        files = readdirSync(dir, 'utf8').map(file => join(dir, file));
+        dir = join(dir, locale.country);
+        files = files.concat(readdirSync(dir, 'utf8').map(file => join(dir, file)));
+        files = files.filter(file => file.endsWith('.txt'));
+    }
 
     const queries = files.map(file => ({ query: readFileSync(file, 'utf8'), file }));
 
