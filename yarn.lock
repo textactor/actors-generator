@@ -89,6 +89,19 @@
     text-country "^0.1.1"
     wiki-entity "^0.3.6"
 
+"@textactor/concept-domain@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@textactor/concept-domain/-/concept-domain-0.1.2.tgz#92ef44ee88f9f30c66349a01c02d9f846395df97"
+  dependencies:
+    "@textactor/domain" "^0.1.5"
+    entity-finder "^0.5.2"
+    ms "^2.1.1"
+    partial-name "^0.1.4"
+    root-name "^0.1.8"
+    shortid "^2.2.8"
+    text-country "^0.1.1"
+    wiki-entity "^0.4.0"
+
 "@textactor/domain@^0.1.5":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@textactor/domain/-/domain-0.1.5.tgz#e16413deb53f0e1cbc841cfb532c619a50df9b59"
@@ -3828,6 +3841,12 @@ wiki-entity@^0.1.3:
 wiki-entity@^0.3.6:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/wiki-entity/-/wiki-entity-0.3.6.tgz#2ddc34386cf2d8ea948e2a8dfab5cd33ca902adc"
+  dependencies:
+    request "^2.81.0"
+
+wiki-entity@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/wiki-entity/-/wiki-entity-0.4.0.tgz#f77bc94c6df77559825e6fdc16756fcb39425310"
   dependencies:
     request "^2.81.0"
 
