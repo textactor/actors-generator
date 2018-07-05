@@ -1,19 +1,7 @@
 
 import {
-    createConnection,
-    ConceptRepository,
-    ConceptRootNameRepository,
-    ConceptModel,
-    ConceptRootNameModel,
-    WikiSearchNameModel,
-    WikiSearchNameRepository,
-    WikiTitleModel,
-    WikiEntityModel as ConceptWikiEntityModel,
-    WikiTitleRepository,
-    WikiEntityRepository as ConceptWikiEntityRepository,
-    ConceptContainerModel,
-    ConceptContainerRepository,
-} from '@textactor/concept-data';
+    explorer,
+} from 'textactor-explorer';
 
 import {
     ActorModel,
@@ -29,14 +17,9 @@ import {
     createTables as wikiEntityCreateTables,
 } from '@textactor/wikientity-data';
 
-const conceptConnection = createConnection(process.env.CONCEPT_DB);
-
-export const conceptRepository = new ConceptRepository(new ConceptModel(conceptConnection));
-export const conceptRootNameRepository = new ConceptRootNameRepository(new ConceptRootNameModel(conceptConnection));
-export const wikiSearchNameRepository = new WikiSearchNameRepository(new WikiSearchNameModel(conceptConnection));
-export const wikiTitleRepository = new WikiTitleRepository(new WikiTitleModel(conceptConnection));
-export const conceptWikiEntityRepository = new ConceptWikiEntityRepository(new ConceptWikiEntityModel(conceptConnection));
-export const containerRepository = new ConceptContainerRepository(new ConceptContainerModel(conceptConnection));
+export const textactorExplorer = explorer({
+    dbConnectionString: process.env.CONCEPT_DB
+});
 
 export const wikiEntityRepository = new WikiEntityRepository(new WikiEntityModel());
 export const actorNameRepository = new ActorNameRepository(new ActorNameModel());
@@ -47,5 +30,5 @@ export function initData() {
 }
 
 export function close() {
-    return conceptConnection.close();
+    return textactorExplorer.closeDatabase();
 }

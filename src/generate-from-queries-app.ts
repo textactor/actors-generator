@@ -12,13 +12,13 @@ if (!locale) {
 import logger from './logger';
 
 import { initData, close } from "./data";
-import { collectConceptsFromQueries } from "./collectConceptsFromQueries";
+import { generateFromQueries } from "./generate-from-queries";
 
 async function start() {
     logger.warn(`START collect-concepts-from-queries ${locale.lang}-${locale.country}`);
     await initData();
 
-    return collectConceptsFromQueries(locale, process.env.FILE).then(() => delay(1000 * 5));
+    return generateFromQueries(locale, process.env.FILE).then(() => delay(1000 * 5));
 }
 
 start()

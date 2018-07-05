@@ -13,25 +13,25 @@ const sourceName = process.env.SOURCE;
 
 import logger from './logger';
 
-import { collectConcepts } from "./collectConcepts";
-import { initData, close, containerRepository } from "./data";
-import { WebsiteConceptEnumerator } from './websiteConceptEnumerator';
-import { DBConceptEnumerator } from './dbConceptEnumerator';
-import { IConceptEnumerator } from './conceptEnumerator';
-import { ConceptContainerHelper } from "@textactor/concept-domain";
+import { collectConcepts } from "./collect-concepts";
+import { initData, close, textactorExplorer } from "./data";
+import { WebsiteConceptEnumerator } from './website-concept-enumerator';
+import { DBConceptEnumerator } from './db-concept-enumerator';
+import { IConceptEnumerator } from './concept-enumerator';
 
 async function start() {
     logger.warn(`START collect-concepts ${locale.lang}-${locale.country}`);
     await initData();
     const enumerator = createEnumerator();
-    const container = await containerRepository.create(ConceptContainerHelper.build({
+    const container = textactorExplorer.newDataContainer({
         name: `actors-generator-app`,
         uniqueName: `actors-generator-app-${Math.round(Date.now() / 1000)}`,
         lang: locale.lang,
         country: locale.country,
         ownerId: 'ournet',
-    }));
-    return collectConcepts(container, enumerator).then(() => delay(1000 * 5));
+    });
+    await collectConcepts(container, enumerator).then(() => delay(1000 * 5));
+    await container.end();
 }
 
 function createEnumerator(): IConceptEnumerator {

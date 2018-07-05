@@ -1,5 +1,5 @@
 import { Locale } from "./utils";
-import { IConceptEnumerator } from "./conceptEnumerator";
+import { IConceptEnumerator } from "./concept-enumerator";
 const debug = require('debug')('actors-generator');
 const News = require('ournet.data.news');
 const newsAccess = News.getAccessService(process.env.NEWS_CONNECTION);

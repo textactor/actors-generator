@@ -60,48 +60,6 @@
     "@textactor/domain" "^0.1.5"
     shortid "^2.2.8"
 
-"@textactor/concept-collector@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@textactor/concept-collector/-/concept-collector-0.1.1.tgz#672415b2db4ce0e3aa52688317de0d77a5e9e648"
-  dependencies:
-    "@textactor/concept-domain" "^0.1.1"
-    "@textactor/domain" "^0.1.5"
-    concepts-parser "^1.3.1"
-
-"@textactor/concept-data@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@textactor/concept-data/-/concept-data-0.1.2.tgz#87f2fa88169307017e9139b995fd601f54b46e1c"
-  dependencies:
-    "@textactor/concept-domain" "^0.1.1"
-    "@textactor/domain" "^0.1.5"
-    mongoose "^5.0.15"
-
-"@textactor/concept-domain@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@textactor/concept-domain/-/concept-domain-0.1.1.tgz#8bd8e556cdd52ccf159080ecb74e3d9d9004bf92"
-  dependencies:
-    "@textactor/domain" "^0.1.5"
-    entity-finder "^0.5.2"
-    ms "^2.1.1"
-    partial-name "^0.1.4"
-    root-name "^0.1.8"
-    shortid "^2.2.8"
-    text-country "^0.1.1"
-    wiki-entity "^0.3.6"
-
-"@textactor/concept-domain@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@textactor/concept-domain/-/concept-domain-0.1.2.tgz#92ef44ee88f9f30c66349a01c02d9f846395df97"
-  dependencies:
-    "@textactor/domain" "^0.1.5"
-    entity-finder "^0.5.2"
-    ms "^2.1.1"
-    partial-name "^0.1.4"
-    root-name "^0.1.8"
-    shortid "^2.2.8"
-    text-country "^0.1.1"
-    wiki-entity "^0.4.0"
-
 "@textactor/domain@^0.1.5":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@textactor/domain/-/domain-0.1.5.tgz#e16413deb53f0e1cbc841cfb532c619a50df9b59"
@@ -109,10 +67,6 @@
     atonic "^1.0.4"
     slugify "^1.2.9"
     standard-text "^0.1.1"
-
-"@textactor/known-names@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@textactor/known-names/-/known-names-0.1.0.tgz#9206df8b66d941881cef30e27e214fe812067860"
 
 "@textactor/wikientity-data@^0.1.1":
   version "0.1.1"
@@ -293,12 +247,6 @@ async@2.1.4:
   dependencies:
     lodash "^4.14.0"
 
-async@2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
-  dependencies:
-    lodash "^4.17.10"
-
 async@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/async/-/async-1.0.0.tgz#f8fc04ca3a13784ade9e1641af98578cfbd647a9"
@@ -307,7 +255,7 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-atonic@^1.0.4, atonic@^1.x.x:
+atonic@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/atonic/-/atonic-1.0.4.tgz#7db3f216070abb68660f18122a380903e09d27c7"
 
@@ -764,7 +712,7 @@ bluebird@3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
-bluebird@^3.0.0, bluebird@^3.5.0:
+bluebird@^3.0.0:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
 
@@ -820,10 +768,6 @@ braces@^1.8.2:
 bson@~1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.6.tgz#444db59ddd4c24f0cb063aabdc5c8c7b0ceca912"
-
-bson@~1.0.5:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.9.tgz#12319f8323b1254739b7c6bef8d3e89ae05a2f57"
 
 buf-compare@^1.0.0:
   version "1.0.1"
@@ -1051,17 +995,6 @@ commondir@^1.0.1:
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
-
-concepts-data@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/concepts-data/-/concepts-data-0.4.2.tgz#599bbeaec65503a17cd5307cd1384c0cc3fe8c81"
-
-concepts-parser@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/concepts-parser/-/concepts-parser-1.3.1.tgz#531e4d5e17d0e9f9f73d4c2ff0e4ee1e4b55aaf6"
-  dependencies:
-    atonic "^1.x.x"
-    concepts-data "^0.4.2"
 
 concordance@^3.0.0:
   version "3.0.0"
@@ -1330,15 +1263,6 @@ encoding@^0.1.12:
 entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
-
-entity-finder@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/entity-finder/-/entity-finder-0.5.2.tgz#0a3ec6d484c63e006fdfc8af8119b3fef4831bed"
-  dependencies:
-    atonic "^1.0.4"
-    request "^2.85.0"
-    wiki-entity "^0.1.3"
-    wikipedia-data "^0.1.1"
 
 equal-length@^1.0.0:
   version "1.0.1"
@@ -2199,10 +2123,6 @@ kareem@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-1.5.0.tgz#e3e4101d9dcfde299769daf4b4db64d895d17448"
 
-kareem@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/kareem/-/kareem-2.2.1.tgz#9950809415aa3cde62ab43b4f7b919d99816e015"
-
 kind-of@^3.0.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
@@ -2342,7 +2262,7 @@ lodash.some@^4.4.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.some/-/lodash.some-4.6.0.tgz#1bb9f314ef6b8baded13b549169b2a945eb68e4d"
 
-lodash@4.x.x, lodash@^4.0.0, lodash@^4.17.10:
+lodash@4.x.x, lodash@^4.0.0:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -2496,13 +2416,6 @@ mongodb-core@2.1.18:
     bson "~1.0.4"
     require_optional "~1.0.0"
 
-mongodb-core@3.0.9:
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.9.tgz#8327410c88811013fb3e4ac7c4c670f324349be1"
-  dependencies:
-    bson "~1.0.4"
-    require_optional "^1.0.1"
-
 mongodb@2.2.34:
   version "2.2.34"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-2.2.34.tgz#a34f59bbeb61754aec432de72c3fe21526a44c1a"
@@ -2510,16 +2423,6 @@ mongodb@2.2.34:
     es6-promise "3.2.1"
     mongodb-core "2.1.18"
     readable-stream "2.2.7"
-
-mongodb@3.0.10:
-  version "3.0.10"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.0.10.tgz#f948cb9595adcbfcad7444f6b24a040b653b23e8"
-  dependencies:
-    mongodb-core "3.0.9"
-
-mongoose-legacy-pluralize@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
 
 mongoose@^4.0.2:
   version "4.13.12"
@@ -2539,29 +2442,9 @@ mongoose@^4.0.2:
     regexp-clone "0.0.1"
     sliced "1.0.1"
 
-mongoose@^5.0.15:
-  version "5.1.6"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.1.6.tgz#af92762c1e0317c897435594e83d6a5952873a0e"
-  dependencies:
-    async "2.6.1"
-    bson "~1.0.5"
-    kareem "2.2.1"
-    lodash.get "4.4.2"
-    mongodb "3.0.10"
-    mongoose-legacy-pluralize "1.0.2"
-    mpath "0.4.1"
-    mquery "3.0.0"
-    ms "2.0.0"
-    regexp-clone "0.0.1"
-    sliced "1.0.1"
-
 mpath@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/mpath/-/mpath-0.3.0.tgz#7a58f789e9b5fd3c94520634157960f26bd5ef44"
-
-mpath@0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/mpath/-/mpath-0.4.1.tgz#ed10388430380bf7bbb5be1391e5d6969cb08e89"
 
 mpromise@0.5.5:
   version "0.5.5"
@@ -2576,20 +2459,11 @@ mquery@2.3.3:
     regexp-clone "0.0.1"
     sliced "0.0.5"
 
-mquery@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/mquery/-/mquery-3.0.0.tgz#e5f387dbabc0b9b69859e550e810faabe0ceabb0"
-  dependencies:
-    bluebird "3.5.0"
-    debug "2.6.9"
-    regexp-clone "0.0.1"
-    sliced "0.0.5"
-
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-ms@^2.0.0, ms@^2.1.1:
+ms@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
 
@@ -2850,10 +2724,6 @@ parse-ms@^0.1.0:
 parse-ms@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parse-ms/-/parse-ms-1.0.1.tgz#56346d4749d78f23430ca0c713850aef91aa361d"
-
-partial-name@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/partial-name/-/partial-name-0.1.4.tgz#ce40868234c5659ff72839eb7a11676a0cd3bd1c"
 
 path-exists@^2.0.0:
   version "2.1.0"
@@ -3265,36 +3135,11 @@ request@^2.79.0:
     tunnel-agent "^0.6.0"
     uuid "^3.1.0"
 
-request@^2.81.0, request@^2.85.0:
-  version "2.87.0"
-  resolved "https://registry.yarnpkg.com/request/-/request-2.87.0.tgz#32f00235cd08d482b4d0d68db93a829c0ed5756e"
-  dependencies:
-    aws-sign2 "~0.7.0"
-    aws4 "^1.6.0"
-    caseless "~0.12.0"
-    combined-stream "~1.0.5"
-    extend "~3.0.1"
-    forever-agent "~0.6.1"
-    form-data "~2.3.1"
-    har-validator "~5.0.3"
-    http-signature "~1.2.0"
-    is-typedarray "~1.0.0"
-    isstream "~0.1.2"
-    json-stringify-safe "~5.0.1"
-    mime-types "~2.1.17"
-    oauth-sign "~0.8.2"
-    performance-now "^2.1.0"
-    qs "~6.5.1"
-    safe-buffer "^5.1.1"
-    tough-cookie "~2.3.3"
-    tunnel-agent "^0.6.0"
-    uuid "^3.1.0"
-
 require-precompiled@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/require-precompiled/-/require-precompiled-0.1.0.tgz#5a1b52eb70ebed43eb982e974c85ab59571e56fa"
 
-require_optional@^1.0.1, require_optional@~1.0.0:
+require_optional@~1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/require_optional/-/require_optional-1.0.1.tgz#4cf35a4247f64ca3df8c2ef208cc494b1ca8fc2e"
   dependencies:
@@ -3333,10 +3178,6 @@ rimraf@~2.4.0:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.4.5.tgz#ee710ce5d93a8fdb856fb5ea8ff0e2d75934b2da"
   dependencies:
     glob "^6.0.1"
-
-root-name@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/root-name/-/root-name-0.1.8.tgz#00eec8892d9de1941468c3db6687f878761fed03"
 
 safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
@@ -3636,10 +3477,6 @@ term-size@^1.2.0:
   dependencies:
     execa "^0.7.0"
 
-text-country@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/text-country/-/text-country-0.1.1.tgz#79980473d81250d28eff8135d595fa7f34031a2c"
-
 text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
@@ -3829,30 +3666,6 @@ widest-line@^2.0.0:
   resolved "https://registry.yarnpkg.com/widest-line/-/widest-line-2.0.0.tgz#0142a4e8a243f8882c0233aa0e0281aa76152273"
   dependencies:
     string-width "^2.1.1"
-
-wiki-entity@^0.1.3:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/wiki-entity/-/wiki-entity-0.1.4.tgz#9b9d5f5d7cc1b7e0114ae347d87f3675ba97fb12"
-  dependencies:
-    bluebird "^3.5.0"
-    lodash "^4.17.4"
-    request "^2.81.0"
-
-wiki-entity@^0.3.6:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/wiki-entity/-/wiki-entity-0.3.6.tgz#2ddc34386cf2d8ea948e2a8dfab5cd33ca902adc"
-  dependencies:
-    request "^2.81.0"
-
-wiki-entity@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/wiki-entity/-/wiki-entity-0.4.0.tgz#f77bc94c6df77559825e6fdc16756fcb39425310"
-  dependencies:
-    request "^2.81.0"
-
-wikipedia-data@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/wikipedia-data/-/wikipedia-data-0.1.1.tgz#b1ecf4bcf3bfd1cf1ead04267e6dcb8519d80328"
 
 winston-loggly@^1.2.0:
   version "1.3.1"

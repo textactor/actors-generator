@@ -1,5 +1,5 @@
 
-import { IConceptEnumerator } from "./conceptEnumerator";
+import { IConceptEnumerator } from "./concept-enumerator";
 const debug = require('debug')('actors-generator');
 const articleScrape = require('ascrape');
 

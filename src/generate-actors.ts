@@ -1,31 +1,34 @@
 
 const debug = require('debug')('actors-generator');
 
-import { ProcessConcepts, ConceptActor, WikiEntityType as ConceptWikiEntityType, WikiEntity as ConceptWikiEntity, ConceptContainer } from "@textactor/concept-domain";
-import { conceptRepository, conceptRootNameRepository, conceptWikiEntityRepository, wikiSearchNameRepository, wikiTitleRepository, actorRepository, actorNameRepository, wikiEntityRepository, containerRepository } from "./data";
+import {
+    textactorExplorer,
+    actorRepository,
+    actorNameRepository,
+    wikiEntityRepository,
+} from "./data";
 import { SaveActor, KnownActorData, ActorType } from "@textactor/actor-domain";
 import { NameHelper } from "@textactor/domain";
-import { getGenerateOptions } from './generateOptions';
-import { WikiEntity, CreatingWikiEntityData, WikiEntityHelper, WikiEntityType } from "@textactor/wikientity-domain";
-import { CountryTagsService } from "./countryTagsService";
-import { KnownNameService } from '@textactor/known-names';
+import { getGenerateOptions } from './generate-options';
+import {
+    DataContainer,
+    Actor as ConceptActor,
+    WikiEntity as ConceptWikiEntity,
+    WikiEntityType as ConceptWikiEntityType,
+    ContainerExplorerOptions,
+} from "textactor-explorer";
+import { CreatingWikiEntityData, WikiEntity, WikiEntityHelper, WikiEntityType } from "@textactor/wikientity-domain";
+import logger from "./logger";
 
-export function generateActors(container: ConceptContainer) {
-    const processConcepts = new ProcessConcepts(container,
-        containerRepository,
-        conceptRepository,
-        conceptRootNameRepository,
-        conceptWikiEntityRepository,
-        wikiSearchNameRepository,
-        wikiTitleRepository,
-        new CountryTagsService(),
-        new KnownNameService());
+export function generateActors(container: DataContainer, options?: ContainerExplorerOptions) {
+
+    options = options || getGenerateOptions(container.country);
+
+    const explorer = textactorExplorer.newExplorer(container.id, options);
 
     const saveActor = new SaveActor(actorRepository, actorNameRepository);
 
-    const processOptions = getGenerateOptions(container.country);
-
-    const onActor = (conceptActor: ConceptActor) => {
+    const onActor = async (conceptActor: ConceptActor) => {
         if (!isValidActor(conceptActor)) {
             debug(`---   Invalid actor: ${conceptActor.name}, wiki=${!!conceptActor.wikiEntity}`);
             return;
@@ -37,10 +40,16 @@ export function generateActors(container: ConceptContainer) {
         if (conceptActor.wikiEntity) {
             tasks.push(saveWikiEntity(conceptActor.wikiEntity));
         }
-        return Promise.all(tasks);
+        await Promise.all(tasks);
     }
 
-    return processConcepts.execute(onActor, processOptions);
+    explorer.onData(onActor);
+    explorer.onError(error => logger.error(error));
+
+    return new Promise((resolve) => {
+        explorer.onEnd(resolve);
+        explorer.start();
+    });
 }
 
 function saveWikiEntity(conceptEntity: ConceptWikiEntity): Promise<WikiEntity> {
