@@ -61,5 +61,7 @@ async function collectConceptsByQuery(container: INewDataContainer, query: strin
         return;
     }
 
-    await container.pushNames(items.map(item => item.title));
+    for (let item of items) {
+        await container.pushTextNames([item.title]);
+    }
 }
