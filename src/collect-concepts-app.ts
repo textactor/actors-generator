@@ -23,7 +23,7 @@ async function start() {
     logger.warn(`START collect-concepts ${locale.lang}-${locale.country}`);
     await initData();
     const enumerator = createEnumerator();
-    const container = textactorExplorer.newDataContainer({
+    const container = await textactorExplorer.newDataContainer({
         name: `actors-generator-app`,
         uniqueName: `actors-generator-app-${Math.round(Date.now() / 1000)}`,
         lang: locale.lang,
@@ -32,6 +32,7 @@ async function start() {
     });
     await collectConcepts(container, enumerator);
     await container.end();
+    await textactorExplorer.closeDatabase();
 }
 
 function createEnumerator(): IConceptEnumerator {

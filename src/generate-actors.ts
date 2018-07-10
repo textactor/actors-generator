@@ -7,8 +7,8 @@ import {
     actorNameRepository,
     wikiEntityRepository,
 } from "./data";
-import { SaveActor, KnownActorData, ActorType } from "@textactor/actor-domain";
-import { NameHelper } from "@textactor/domain";
+import { SaveActor, KnownActorData, ActorType, ActorNameType } from "@textactor/actor-domain";
+import { NameHelper, uniqByProp } from "@textactor/domain";
 import { getGenerateOptions } from './generate-options';
 import {
     DataContainer,
@@ -66,6 +66,7 @@ function saveWikiEntity(conceptEntity: ConceptWikiEntity): Promise<WikiEntity> {
         name: conceptEntity.name,
         type: conceptWikiTypeToWikiType(conceptEntity.type),
         types: conceptEntity.types,
+        countLinks: Object.keys(conceptEntity.links).length,
     };
 
     const entity = WikiEntityHelper.create(knownData);
@@ -97,21 +98,23 @@ function isValidActor(conceptActor: ConceptActor) {
 function conceptActorToActor(conceptActor: ConceptActor) {
     const actorData: KnownActorData = {
         name: conceptActor.name,
-        names: conceptActor.names.map(name => ({ name })),
+        names: [],
         country: conceptActor.country,
         lang: conceptActor.lang,
         type: conceptActor.wikiEntity && conceptWikiTypeToActorType(conceptActor.wikiEntity.type),
-    };
-
-    if (conceptActor.wikiEntity) {
-        actorData.wikiEntity = {
+        wikiEntity: {
             wikiDataId: conceptActor.wikiEntity.wikiDataId,
             description: conceptActor.wikiEntity.description,
             name: conceptActor.wikiEntity.name,
             wikiPageTitle: conceptActor.wikiEntity.wikiPageTitle,
-            // countryCode: conceptActor.wikiEntity.countryCode,
-        };
-    }
+            countLinks: Object.keys(conceptActor.wikiEntity.links).length,
+        }
+    };
+
+    actorData.names = conceptActor.wikiEntity.names.map(name => ({ name, type: ActorNameType.WIKI }));
+    actorData.names = actorData.names.concat(conceptActor.names.map(name => ({ name, type: ActorNameType.SAME })));
+
+    actorData.names = uniqByProp(actorData.names, 'name');
 
     return actorData;
 }
