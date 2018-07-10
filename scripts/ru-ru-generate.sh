@@ -8,6 +8,4 @@ PAST_DAYS=10 PERIOD=4 LOCALE=ru-ru yarn collect
 
 DEBUG=actors*,textactor:concept-domain* LOCALE=ru-ru yarn generate
 
-LOCALE=ru-ru yarn collect-from-queries
-
-DEBUG=actors*,textactor:concept-domain* LOCALE=ru-ru yarn generate
+LOCALE=ru-ru yarn generate-from-queries
