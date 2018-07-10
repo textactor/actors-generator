@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 
-import { delay, parseLocale } from "./utils";
+import { parseLocale } from "./utils";
 
 const locale = parseLocale(process.env.LOCALE);
 
@@ -18,7 +18,7 @@ async function start() {
     logger.warn(`START collect-concepts-from-queries ${locale.lang}-${locale.country}`);
     await initData();
 
-    return generateFromQueries(locale, process.env.FILE).then(() => delay(1000 * 5));
+    return generateFromQueries(locale, process.env.FILE);
 }
 
 start()

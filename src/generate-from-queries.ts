@@ -38,6 +38,8 @@ export async function generateFromQueries(locale: { lang: string, country: strin
     }
     await dataContainer.end();
 
+    logger.warn(`End collecting from files`);
+
     await generateActors(dataContainer.container(), {
         minAbbrConceptPopularity: 1,
         minConceptPopularity: 1,

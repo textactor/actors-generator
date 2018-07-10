@@ -1,6 +1,18 @@
 import { ContainerExplorerOptions } from "textactor-explorer";
 
+const GENERATE_ALL_CONCEPTS = process.env.GENERATE_ALL_CONCEPTS;
+
 export function getGenerateOptions(country: string) {
+    if (~['true', 'True', '1', 'yes'].indexOf(GENERATE_ALL_CONCEPTS)) {
+        return {
+            minConceptPopularity: 1,
+            minAbbrConceptPopularity: 1,
+            minOneWordConceptPopularity: 1,
+            minRootConceptPopularity: 1,
+            minRootAbbrConceptPopularity: 1,
+            minRootOneWordConceptPopularity: 1,
+        }
+    }
     return OPTIONS[country] || DEFAULT_OPTIONS;
 }
 
