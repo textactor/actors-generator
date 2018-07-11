@@ -61,6 +61,14 @@
     fast-array-diff "^0.2.0"
     shortid "^2.2.8"
 
+"@textactor/actor-domain@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@textactor/actor-domain/-/actor-domain-0.1.5.tgz#912a2a176de510c508c547fc4c497b254c185af2"
+  dependencies:
+    "@textactor/domain" "^0.1.6"
+    fast-array-diff "^0.2.0"
+    shortid "^2.2.8"
+
 "@textactor/domain@^0.1.6":
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/@textactor/domain/-/domain-0.1.6.tgz#26ad1552eaad78c1f5e74997e3f8403c9a72ee34"

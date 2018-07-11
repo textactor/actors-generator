@@ -17,6 +17,13 @@ import {
     createTables as wikiEntityCreateTables,
 } from '@textactor/wikientity-data';
 
+import {
+    setLogger
+} from '@textactor/actor-domain';
+import logger from './logger';
+
+setLogger(logger);
+
 export const textactorExplorer = explorer({
     dbConnectionString: process.env.CONCEPT_DB
 });

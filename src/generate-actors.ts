@@ -108,6 +108,7 @@ function conceptActorToActor(conceptActor: ConceptActor) {
             name: conceptActor.wikiEntity.name,
             wikiPageTitle: conceptActor.wikiEntity.wikiPageTitle,
             countLinks: Object.keys(conceptActor.wikiEntity.links).length,
+            countryCodes: conceptActor.wikiEntity.countryCodes,
         }
     };
 
