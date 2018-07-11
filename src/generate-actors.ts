@@ -27,6 +27,7 @@ export function generateActors(container: DataContainer, options?: ContainerExpl
     const explorer = textactorExplorer.newExplorer(container.id, options);
 
     const saveActor = new SaveActor(actorRepository, actorNameRepository);
+    let countAdded = 0;
 
     const onActor = async (conceptActor: ConceptActor) => {
         if (!isValidActor(conceptActor)) {
@@ -36,6 +37,13 @@ export function generateActors(container: DataContainer, options?: ContainerExpl
         // conceptActor.
         const actor = conceptActorToActor(conceptActor);
         debug(`+++   Adding new actor: ${actor.name}`);
+
+        countAdded++;
+
+        if (countAdded % 50 === 0) {
+            logger.warn(`Added ${countAdded} actors`, { id: container.id, lang: container.lang, country: container.country });
+        }
+
         const tasks: Promise<any>[] = [saveActor.execute(actor)];
         if (conceptActor.wikiEntity) {
             tasks.push(saveWikiEntity(conceptActor.wikiEntity));
@@ -48,6 +56,7 @@ export function generateActors(container: DataContainer, options?: ContainerExpl
 
     return new Promise((resolve) => {
         explorer.onEnd(resolve);
+        logger.warn(`Starting generating actors for: ${container.uniqueName}`);
         explorer.start();
     });
 }

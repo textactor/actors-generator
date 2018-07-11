@@ -30,6 +30,11 @@ async function start() {
         limit: 10,
     });
 
+    if (!containers.length) {
+        logger.warn(`No container found!`, locale);
+        return;
+    }
+
     for (let container of containers) {
         logger.warn(`Start processing container: ${container.uniqueName}: ${container.status}`);
         await generateActors(container);
