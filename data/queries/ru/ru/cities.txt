@@ -1,0 +1,14 @@
+PREFIX schema: <http://schema.org/>
+
+SELECT ?item ?itemTitle WHERE {
+  ?item wdt:P31 wd:Q515.
+  # Rusia
+  { ?item wdt:P17 wd:Q159. }
+  UNION
+  # Ucraina
+  { ?item wdt:P17 wd:Q212. }
+  UNION
+  # Belarus
+  { ?item wdt:P17 wd:Q184. }
+  ?sitelink schema:isPartOf <https://ru.wikipedia.org/>;schema:about ?item;schema:name ?itemTitle.
+}
