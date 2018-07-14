@@ -26,3 +26,6 @@ start()
     .catch(e => logger.error(e))
     .then(() => close())
     .then(() => process.exit());
+
+process.on("uncaughtException", error => logger.error(error));
+process.on("unhandledRejection", error => logger.error(error));
