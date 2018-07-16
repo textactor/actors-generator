@@ -54,6 +54,6 @@
     "node-fetch": "^2.1.2",
     "ournet.data.news": "^0.3.6",
     "ournet.logger": "^0.1.0",
-    "textactor-explorer": "^0.1.1"
+    "textactor-explorer": "^0.1.2"
   }
 }
