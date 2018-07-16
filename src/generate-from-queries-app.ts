@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 
-import { parseLocale } from "./utils";
+import { parseLocale, delay } from "./utils";
 
 const locale = parseLocale(process.env.LOCALE);
 
@@ -25,6 +25,7 @@ start()
     .then(() => logger.warn('END'))
     .catch(e => logger.error(e))
     .then(() => close())
+    .then(() => delay(1000 * 3))
     .then(() => process.exit());
 
 process.on("uncaughtException", error => logger.error(error));

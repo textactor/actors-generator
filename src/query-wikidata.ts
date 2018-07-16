@@ -7,7 +7,7 @@ export type WikidataQueryEntity = {
 }
 
 export function queryWikidata(query: string): Promise<WikidataQueryEntity[]> {
-    const url = 'https://query.wikidata.org/bigdata/namespace/wdq/sparql?format=json&query=' + encodeURIComponent(query);
+    const url = 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query);
     return fetch(url)
         .then(response => response.json())
         .then(json => {
