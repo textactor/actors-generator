@@ -34,7 +34,12 @@ export async function generateFromQueries(locale: { lang: string, country: strin
     });
 
     for (let query of queries) {
-        await collectConceptsByQuery(dataContainer, query.query, query.file);
+        try {
+            await collectConceptsByQuery(dataContainer, query.query, query.file);
+        } catch (e) {
+            logger.error(`Error on file: ${query.file}`);
+            logger.error(e);
+        }
     }
     await dataContainer.end();
 
