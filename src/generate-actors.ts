@@ -19,6 +19,7 @@ import {
 } from "textactor-explorer";
 import { CreatingWikiEntityData, WikiEntity, WikiEntityHelper, WikiEntityType } from "@textactor/wikientity-domain";
 import logger from "./logger";
+import { delay } from "./utils";
 
 export function generateActors(container: DataContainer, options?: ContainerExplorerOptions) {
 
@@ -49,6 +50,7 @@ export function generateActors(container: DataContainer, options?: ContainerExpl
             tasks.push(saveWikiEntity(conceptActor.wikiEntity));
         }
         await Promise.all(tasks);
+        await delay(300);
     }
 
     explorer.onData(onActor);
