@@ -6,7 +6,7 @@ const articleScrape = require('ascrape');
 export class WebsiteConceptEnumerator implements IConceptEnumerator {
     currentId: number
     constructor(private options: { startId: number, endId: number, url: string }) {
-        if (options.url.indexOf('ID') < 1) {
+        if (!options.url.includes('ID')) {
             throw new Error(`Invalid url: ${options.url}`);
         }
         if (!Number.isFinite(options.startId) || !Number.isFinite(options.endId) || options.startId > options.endId) {
@@ -16,9 +16,9 @@ export class WebsiteConceptEnumerator implements IConceptEnumerator {
     }
 
     static createFromEnv() {
-        const startId = parseInt(process.env.START_ID);
-        const endId = parseInt(process.env.END_ID);
-        const url = process.env.URL;
+        const startId = parseInt(process.env.START_ID || '');
+        const endId = parseInt(process.env.END_ID || '');
+        const url = process.env.URL || '';
 
         debug('startId=', startId)
         debug('endId=', endId)
@@ -35,9 +35,9 @@ export class WebsiteConceptEnumerator implements IConceptEnumerator {
         })
     }
 
-    private async getNext(tries?: number): Promise<string> {
+    private async getNext(tries?: number): Promise<string | null> {
         this.currentId++;
-        if (this.currentId >= this.options.endId || tries > 4) {
+        if (this.currentId >= this.options.endId || tries !== undefined && tries > 4) {
             return null;
         }
         tries = tries || 0;
@@ -51,9 +51,9 @@ export class WebsiteConceptEnumerator implements IConceptEnumerator {
     }
 }
 
-function fetchUrl(url: string): Promise<string> {
+function fetchUrl(url: string) {
     debug(`getting url: ${url}`)
-    return new Promise((resolve, reject) => {
+    return new Promise<string | null>((resolve, reject) => {
         articleScrape(url, (error: Error, article: any) => {
             if (error) {
                 reject(error);

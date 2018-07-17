@@ -107,6 +107,9 @@ function isValidActor(conceptActor: ConceptActor) {
 }
 
 function conceptActorToActor(conceptActor: ConceptActor) {
+    if (!conceptActor.wikiEntity) {
+        throw new Error(`No conceptActor.wikiEntity`);
+    }
     const actorData: KnownActorData = {
         name: conceptActor.name,
         names: [],
@@ -131,7 +134,7 @@ function conceptActorToActor(conceptActor: ConceptActor) {
     return actorData;
 }
 
-function conceptWikiTypeToWikiType(wikiType: ConceptWikiEntityType): WikiEntityType {
+function conceptWikiTypeToWikiType(wikiType: ConceptWikiEntityType | undefined) {
     switch (wikiType) {
         case ConceptWikiEntityType.EVENT: return WikiEntityType.EVENT;
         case ConceptWikiEntityType.ORG: return WikiEntityType.ORG;
@@ -142,7 +145,7 @@ function conceptWikiTypeToWikiType(wikiType: ConceptWikiEntityType): WikiEntityT
     }
 }
 
-function conceptWikiTypeToActorType(wikiType: ConceptWikiEntityType): ActorType {
+function conceptWikiTypeToActorType(wikiType: ConceptWikiEntityType | undefined) {
     switch (wikiType) {
         case ConceptWikiEntityType.EVENT: return ActorType.EVENT;
         case ConceptWikiEntityType.ORG: return ActorType.ORG;

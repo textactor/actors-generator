@@ -1,4 +1,10 @@
 
+if (!process.env.CONCEPT_DB) {
+    throw new Error(`CONCEPT_DB is required!`);
+}
+
+const DB_CONNECTION = process.env.CONCEPT_DB;
+
 import {
     explorer,
 } from 'textactor-explorer';
@@ -25,7 +31,7 @@ import logger from './logger';
 setLogger(logger);
 
 export const textactorExplorer = explorer({
-    dbConnectionString: process.env.CONCEPT_DB
+    dbConnectionString: DB_CONNECTION
 });
 
 export const wikiEntityRepository = new WikiEntityRepository(new WikiEntityModel());

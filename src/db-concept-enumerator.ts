@@ -47,7 +47,7 @@ export class DBConceptEnumerator implements IConceptEnumerator {
     }
 }
 
-function getNumber(s: string, def: number): number {
+function getNumber(s: string | undefined, def: number): number {
     if (s && Number.isSafeInteger(parseInt(s))) {
         return parseInt(s);
     }

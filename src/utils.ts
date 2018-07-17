@@ -8,7 +8,7 @@ export function delay(ms: number) {
     return new Promise(resolve => setTimeout(() => resolve(), ms));
 }
 
-export function parseLocale(s: string): Locale {
+export function parseLocale(s: string | undefined | null): Locale | null {
     if (!s || s.length !== 5) {
         return null;
     }

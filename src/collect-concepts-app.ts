@@ -1,15 +1,15 @@
 
 require('dotenv').config();
 
-import { parseLocale } from "./utils";
+import { parseLocale, Locale } from "./utils";
 
-const locale = parseLocale(process.env.LOCALE);
+const locale = parseLocale(process.env.LOCALE) as Locale;
 
 if (!locale) {
     throw new Error('LOCALE env is required!');
 }
 
-const sourceName = process.env.SOURCE;
+const sourceName = process.env.SOURCE as string;
 
 import logger from './logger';
 
