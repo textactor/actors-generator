@@ -49,9 +49,6 @@ export async function generateFromQueries(locale: { lang: string, country: strin
         minAbbrConceptPopularity: 1,
         minConceptPopularity: 1,
         minOneWordConceptPopularity: 1,
-        minRootAbbrConceptPopularity: 1,
-        minRootConceptPopularity: 1,
-        minRootOneWordConceptPopularity: 1,
     });
 }
 
