@@ -3330,9 +3330,9 @@ safer-buffer@^2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
-same-names@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/same-names/-/same-names-0.1.2.tgz#67cdd492085d2b1c74629989f37d9b8cb803f6fc"
+same-names@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/same-names/-/same-names-0.1.4.tgz#8dc808350eebdad5c92c371c206730830237ed77"
 
 saslprep@^1.0.0:
   version "1.0.0"
@@ -3634,9 +3634,9 @@ text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
-textactor-explorer@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/textactor-explorer/-/textactor-explorer-0.1.3.tgz#077a77c389daf779427457ee45f9eab65d93f8d5"
+textactor-explorer@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/textactor-explorer/-/textactor-explorer-0.1.4.tgz#798c1da7edeed8672aeaa0160a97baeea3e207dd"
   dependencies:
     "@textactor/known-names" "^0.1.1"
     atonic "^1.0.4"
@@ -3645,7 +3645,7 @@ textactor-explorer@^0.1.3:
     entity-finder "^0.5.2"
     mongoose "^5.2.0"
     partial-name "^0.1.4"
-    same-names "^0.1.2"
+    same-names "^0.1.4"
     shortid "^2.2.8"
     standard-text "^0.1.1"
     text-country "^0.1.1"
