@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 
-import { parseLocale, Locale } from "./utils";
+import { parseLocale, Locale, delay } from "./utils";
 
 const locale = parseLocale(process.env.LOCALE) as Locale;
 
@@ -43,9 +43,10 @@ function createEnumerator(): IConceptEnumerator {
 }
 
 start()
-    .then(() => console.log('END'))
+    .then(() => logger.warn('END', locale))
     .catch(e => logger.error(e))
     .then(() => close())
+    .then(() => delay(3 * 1000))
     .then(() => process.exit());
 
 process.on("uncaughtException", error => logger.error(error));

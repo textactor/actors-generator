@@ -33,6 +33,9 @@ export function generateActors(container: DataContainer, options?: ContainerExpl
     const onActor = async (conceptActor: ConceptActor) => {
         if (!isValidActor(conceptActor)) {
             debug(`---   Invalid actor: ${conceptActor.name}, wiki=${!!conceptActor.wikiEntity}`);
+            if (['Moscow', 'Россия', 'России', 'Москва', 'Москве', 'Москвы'].includes(conceptActor.name)) {
+                logger.warn(`Invalid actor: ${conceptActor.name}`, conceptActor);
+            }
             return;
         }
         // conceptActor.
