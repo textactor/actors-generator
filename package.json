@@ -37,7 +37,7 @@
   },
   "homepage": "https://Mitea@bitbucket.org/entitizer/actors-generator#readme",
   "devDependencies": {
-    "@types/node": "latest",
+    "@types/node": "^10.5.2",
     "@types/node-fetch": "^1.6.9",
     "ava": "^0.23.0",
     "dotenv": "^5.0.1",
@@ -54,6 +54,6 @@
     "node-fetch": "^2.1.2",
     "ournet.data.news": "^0.3.6",
     "ournet.logger": "^0.1.0",
-    "textactor-explorer": "^0.1.4"
+    "textactor-explorer": "^0.1.5"
   }
 }
