@@ -129,7 +129,8 @@ function conceptActorToActor(conceptActor: ConceptActor) {
         }
     };
 
-    actorData.names = conceptActor.wikiEntity.names.map(name => ({ name, type: ActorNameType.WIKI }));
+    actorData.names = [{ type: ActorNameType.WIKI, name: conceptActor.wikiEntity.name }];
+    actorData.names = actorData.names.concat(conceptActor.wikiEntity.names.map(name => ({ name, type: ActorNameType.WIKI })));
     actorData.names = actorData.names.concat(conceptActor.names.map(name => ({ name, type: ActorNameType.SAME })));
 
     actorData.names = uniqByProp(actorData.names, 'name');
