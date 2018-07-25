@@ -42,6 +42,10 @@ export function generateActors(container: DataContainer, options?: ContainerExpl
         const actor = conceptActorToActor(conceptActor);
         debug(`+++   Adding new actor: ${actor.name}`);
 
+        if (['Moscow', 'Россия', 'России', 'Москва', 'Москве', 'Москвы'].includes(actor.name)) {
+            logger.warn(`Adding new actor: ${actor.name}`, actor);
+        }
+
         countAdded++;
 
         if (countAdded % 50 === 0) {
@@ -129,8 +133,7 @@ function conceptActorToActor(conceptActor: ConceptActor) {
         }
     };
 
-    actorData.names = [{ type: ActorNameType.WIKI, name: conceptActor.wikiEntity.name }];
-    actorData.names = actorData.names.concat(conceptActor.wikiEntity.names.map(name => ({ name, type: ActorNameType.WIKI })));
+    actorData.names = conceptActor.wikiEntity.names.map(name => ({ name, type: ActorNameType.WIKI }));
     actorData.names = actorData.names.concat(conceptActor.names.map(name => ({ name, type: ActorNameType.SAME })));
 
     actorData.names = uniqByProp(actorData.names, 'name');
