@@ -45,8 +45,8 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "@textactor/actor-data": "^0.1.4",
-    "@textactor/actor-domain": "^0.1.5",
+    "@textactor/actor-data": "^0.1.5",
+    "@textactor/actor-domain": "^0.1.6",
     "@textactor/domain": "^0.1.6",
     "@textactor/wikientity-data": "^0.1.2",
     "@textactor/wikientity-domain": "^0.1.2",
@@ -54,6 +54,6 @@
     "node-fetch": "^2.1.2",
     "ournet.data.news": "^0.3.6",
     "ournet.logger": "^0.1.0",
-    "textactor-explorer": "^0.1.8"
+    "textactor-explorer": "^0.1.9"
   }
 }
