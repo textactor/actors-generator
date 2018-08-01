@@ -123,6 +123,7 @@ function conceptActorToActor(conceptActor: ConceptActor) {
         country: conceptActor.country,
         lang: conceptActor.lang,
         type: conceptActor.wikiEntity && conceptWikiTypeToActorType(conceptActor.wikiEntity.type),
+        commonName: conceptActor.commonName,
         wikiEntity: {
             wikiDataId: conceptActor.wikiEntity.wikiDataId,
             description: conceptActor.wikiEntity.description,
@@ -133,8 +134,10 @@ function conceptActorToActor(conceptActor: ConceptActor) {
         }
     };
 
-    actorData.names = conceptActor.wikiEntity.names.map(name => ({ name, type: ActorNameType.WIKI }));
-    actorData.names = actorData.names.concat(conceptActor.names.map(name => ({ name, type: ActorNameType.SAME })));
+    const wikiNames = conceptActor.wikiEntity.names.map(name => ({ name, type: ActorNameType.WIKI }));;
+    const sameNames = conceptActor.names.map(name => ({ name, type: ActorNameType.SAME }));
+
+    actorData.names = wikiNames.concat(sameNames);
 
     actorData.names = uniqByProp(actorData.names, 'name');
 
