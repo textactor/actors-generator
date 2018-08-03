@@ -141,6 +141,13 @@ function conceptActorToActor(conceptActor: ConceptActor) {
 
     actorData.names = uniqByProp(actorData.names, 'name');
 
+    if (conceptActor.wikiEntity) {
+        const links = conceptActor.wikiEntity.links;
+        if (links && links['en']) {
+            actorData.englishName = links['en'].trim();
+        }
+    }
+
     return actorData;
 }
 

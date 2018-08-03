@@ -45,8 +45,8 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "@textactor/actor-data": "^0.1.5",
-    "@textactor/actor-domain": "^0.1.6",
+    "@textactor/actor-data": "^0.1.6",
+    "@textactor/actor-domain": "^0.1.7",
     "@textactor/domain": "^0.1.6",
     "@textactor/wikientity-data": "^0.1.2",
     "@textactor/wikientity-domain": "^0.1.2",
