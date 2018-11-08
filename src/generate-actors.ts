@@ -8,7 +8,7 @@ import {
     wikiEntityRepository,
 } from "./data";
 import { SaveActor, KnownActorData, ActorType, ActorNameType } from "@textactor/actor-domain";
-import { NameHelper, uniqByProp } from "@textactor/domain";
+import { NameHelper } from "@textactor/domain";
 import { getGenerateOptions } from './generate-options';
 import {
     DataContainer,
@@ -97,19 +97,28 @@ function isValidActor(conceptActor: ConceptActor) {
         return false;
     }
 
-    if (!conceptActor.wikiEntity.type) {
-        if (NameHelper.countWords(conceptActor.wikiEntity.name) < 2) {
-            debug(`actor no type and too short: ${conceptActor.wikiEntity.name}`);
+    const nameCountWords = Math.min(NameHelper.countWords(conceptActor.wikiEntity.name), NameHelper.countWords(conceptActor.name));
+
+    if (nameCountWords < 2) {
+        if (!conceptActor.wikiEntity.type) {
+            logger.warn(`actor no type and too short: ${conceptActor.wikiEntity.name}`);
+            return false;
+        }
+        const isLocale = conceptActor.wikiEntity.countryCodes.includes(conceptActor.country);
+        const countLinks = Object.keys(conceptActor.wikiEntity.links).length;
+
+        if (!isLocale && countLinks < 10) {
+            logger.warn(`actor too short name & not popular: ${conceptActor.name}`);
             return false;
         }
     }
 
-    const lowerCaseNames = conceptActor.wikiEntity.names.filter(name => name.toLowerCase() === name);
+    // const lowerCaseNames = conceptActor.wikiEntity.names.filter(name => name.toLowerCase() === name);
 
-    if (lowerCaseNames.length > conceptActor.wikiEntity.names.length / 3) {
-        debug(`too many lowecase names: ${lowerCaseNames}`);
-        return false;
-    }
+    // if (lowerCaseNames.length > conceptActor.wikiEntity.names.length / 3) {
+    //     debug(`too many lowecase names: ${lowerCaseNames}`);
+    //     return false;
+    // }
     return true;
 }
 
@@ -119,11 +128,12 @@ function conceptActorToActor(conceptActor: ConceptActor) {
     }
     const actorData: KnownActorData = {
         name: conceptActor.name,
-        names: [],
+        names: conceptActor.names.map(item => ({ name: item.name, popularity: item.popularity, type: item.type as ActorNameType })),
         country: conceptActor.country,
         lang: conceptActor.lang,
         type: conceptActor.wikiEntity && conceptWikiTypeToActorType(conceptActor.wikiEntity.type),
         commonName: conceptActor.commonName,
+        abbr: conceptActor.abbr,
         wikiEntity: {
             wikiDataId: conceptActor.wikiEntity.wikiDataId,
             description: conceptActor.wikiEntity.description,
@@ -133,13 +143,6 @@ function conceptActorToActor(conceptActor: ConceptActor) {
             countryCodes: conceptActor.wikiEntity.countryCodes,
         }
     };
-
-    const wikiNames = conceptActor.wikiEntity.names.map(name => ({ name, type: ActorNameType.WIKI }));;
-    const sameNames = conceptActor.names.map(name => ({ name, type: ActorNameType.SAME }));
-
-    actorData.names = wikiNames.concat(sameNames);
-
-    actorData.names = uniqByProp(actorData.names, 'name');
 
     if (conceptActor.wikiEntity) {
         const links = conceptActor.wikiEntity.links;
