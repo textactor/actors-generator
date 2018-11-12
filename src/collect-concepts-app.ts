@@ -14,16 +14,16 @@ const sourceName = process.env.SOURCE as string;
 import logger from './logger';
 
 import { collectConcepts } from "./collect-concepts";
-import { initData, close, textactorExplorer } from "./data";
+import { create, close } from "./data";
 import { WebsiteConceptEnumerator } from './website-concept-enumerator';
 import { DBConceptEnumerator } from './db-concept-enumerator';
 import { IConceptEnumerator } from './concept-enumerator';
 
 async function start() {
     logger.warn(`START collect-concepts ${locale.lang}-${locale.country}`);
-    await initData();
+    const explorer = await create();
     const enumerator = createEnumerator();
-    const container = await textactorExplorer.newDataContainer({
+    const container = await explorer.createCollector({
         name: `actors-generator-app`,
         uniqueName: `actors-generator-app-${Math.round(Date.now() / 1000)}`,
         lang: locale.lang,
@@ -32,7 +32,7 @@ async function start() {
     });
     await collectConcepts(container, enumerator);
     await container.end();
-    await textactorExplorer.closeDatabase();
+    await close();
 }
 
 function createEnumerator(): IConceptEnumerator {

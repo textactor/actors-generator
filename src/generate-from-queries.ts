@@ -2,16 +2,16 @@
 // const debug = require('debug')('actors-generator');
 
 
-import { textactorExplorer } from "./data";
 import { queryWikidata } from './query-wikidata';
 import { isWikidataId } from './utils';
 import { readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
 import logger from './logger';
-import { INewDataContainer } from "textactor-explorer";
 import { generateActors } from "./generate-actors";
+import { ExplorerApi, DataCollector } from '@textactor/actors-explorer';
 
-export async function generateFromQueries(locale: { lang: string, country: string }, file?: string) {
+
+export async function generateFromQueries(explorer: ExplorerApi, locale: { lang: string, country: string }, file?: string) {
     let files: string[]
     if (file) {
         files = [file];
@@ -25,7 +25,7 @@ export async function generateFromQueries(locale: { lang: string, country: strin
 
     const queries = files.map(file => ({ query: readFileSync(file, 'utf8'), file }));
 
-    const dataContainer = await textactorExplorer.newDataContainer({
+    const dataContainer = await explorer.createCollector({
         name: `actors-generator-app`,
         uniqueName: `actors-generator-app-${Math.round(Date.now() / 1000)}`,
         lang: locale.lang,
@@ -45,14 +45,14 @@ export async function generateFromQueries(locale: { lang: string, country: strin
 
     logger.warn(`End collecting from files`);
 
-    await generateActors(dataContainer.container(), {
+    await generateActors(explorer, dataContainer.container(), {
         minAbbrConceptPopularity: 1,
         minConceptPopularity: 1,
         minOneWordConceptPopularity: 1,
     });
 }
 
-async function collectConceptsByQuery(container: INewDataContainer, query: string, file: string) {
+async function collectConceptsByQuery(collector: DataCollector, query: string, file: string) {
     logger.warn(`processing file: ${file}`);
     let items = await queryWikidata(query);
 
@@ -66,6 +66,6 @@ async function collectConceptsByQuery(container: INewDataContainer, query: strin
     }
 
     for (let item of items) {
-        await container.pushTextNames([item.title]);
+        await collector.pushTextNames([item.title]);
     }
 }

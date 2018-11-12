@@ -11,15 +11,15 @@ if (!locale) {
 
 import logger from './logger';
 
-import { initData, close, textactorExplorer } from "./data";
+import { close, create } from "./data";
 import { generateActors } from './generate-actors';
-import { ConceptContainerStatus } from "textactor-explorer";
+import { ConceptContainerStatus } from "@textactor/concept-domain";
 
 async function start() {
     logger.warn(`START generate-actors ${locale.lang}-${locale.country}`);
-    await initData();
+    const explorer = await create();
 
-    const containers = await textactorExplorer.findDataContainer({
+    const containers = await explorer.findConceptContainer({
         ...locale,
         status: [
             ConceptContainerStatus.COLLECT_DONE,
@@ -37,7 +37,11 @@ async function start() {
 
     for (let container of containers) {
         logger.warn(`Start processing container: ${container.uniqueName}: ${container.status}`);
-        await generateActors(container);
+        await generateActors(explorer, container, {
+            minAbbrConceptPopularity: 2,
+            minConceptPopularity: 5,
+            minOneWordConceptPopularity: 10,
+        });
     }
 }
 

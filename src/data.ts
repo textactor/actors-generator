@@ -6,42 +6,75 @@ if (!process.env.CONCEPT_DB) {
 const DB_CONNECTION = process.env.CONCEPT_DB;
 
 import {
-    explorer,
-} from 'textactor-explorer';
+    createExplorer,
+} from '@textactor/actors-explorer';
 
 import {
-    ActorModel,
-    ActorNameModel,
-    ActorNameRepository,
-    ActorRepository,
-    createTables as actorsCreateTables,
+    ActorNameRepositoryBuilder,
+    ActorRepositoryBuilder,
 } from '@textactor/actor-data';
 
 import {
-    WikiEntityModel,
-    WikiEntityRepository,
-    createTables as wikiEntityCreateTables,
+    WikiEntityRepositoryBuilder,
 } from '@textactor/wikientity-data';
 
 import {
-    setLogger
+    setLogger,
 } from '@textactor/actor-domain';
 import logger from './logger';
-
 setLogger(logger);
 
-export const textactorExplorer = explorer({
-    dbConnectionString: DB_CONNECTION
-});
+import {
+    ConceptContainerRepositoryBuilder,
+    ConceptRepositoryBuilder,
+    WikiEntityRepositoryBuilder as ConceptWikiEntityRepositoryBuilder,
+    WikiSearchNameRepositoryBuilder,
+    WikiTitleRepositoryBuilder,
+} from '@textactor/concept-data';
 
-export const wikiEntityRepository = new WikiEntityRepository(new WikiEntityModel());
-export const actorNameRepository = new ActorNameRepository(new ActorNameModel());
-export const actorRepository = new ActorRepository(new ActorModel());
+import DynamoDB = require('aws-sdk/clients/dynamodb');
+import { MongoClient } from 'mongodb';
 
-export function initData() {
-    return Promise.all([actorsCreateTables(), wikiEntityCreateTables()]);
+const dynamoDbClient = new DynamoDB.DocumentClient();
+
+export const actorNameRepository = ActorNameRepositoryBuilder.build(dynamoDbClient);
+export const actorRepository = ActorRepositoryBuilder.build(dynamoDbClient);
+export const wikiEntityRepository = WikiEntityRepositoryBuilder.build(dynamoDbClient);
+
+let mongoClient: MongoClient;
+
+export async function create() {
+    mongoClient = await MongoClient.connect(DB_CONNECTION);
+    const mongoDb = mongoClient.db();
+
+    const conceptContainerRepository = ConceptContainerRepositoryBuilder.build(mongoDb);
+    const conceptRepository = ConceptRepositoryBuilder.build(mongoDb);
+    const conceptWikiEntityRepository = ConceptWikiEntityRepositoryBuilder.build(mongoDb);
+    const wikiSearchNameRepository = WikiSearchNameRepositoryBuilder.build(mongoDb);
+    const wikiTitleRepository = WikiTitleRepositoryBuilder.build(mongoDb);
+
+    await Promise.all([
+        actorNameRepository.createStorage(),
+        actorRepository.createStorage(),
+        wikiEntityRepository.createStorage(),
+        conceptContainerRepository.createStorage(),
+        conceptRepository.createStorage(),
+        conceptWikiEntityRepository.createStorage(),
+        wikiSearchNameRepository.createStorage(),
+        wikiTitleRepository.createStorage(),
+    ]);
+
+    return createExplorer({
+        conceptRep: conceptRepository,
+        containerRep: conceptContainerRepository,
+        entityRep: conceptWikiEntityRepository,
+        searchNameRep: wikiSearchNameRepository,
+        wikiTitleRep: wikiTitleRepository,
+    })
 }
 
-export function close() {
-    return textactorExplorer.closeDatabase();
+export async function close() {
+    if (mongoClient) {
+        await mongoClient.close();
+    }
 }

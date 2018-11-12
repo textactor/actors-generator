@@ -2,30 +2,32 @@
 const debug = require('debug')('actors-generator');
 
 import {
-    textactorExplorer,
     actorRepository,
     actorNameRepository,
     wikiEntityRepository,
 } from "./data";
-import { SaveActor, KnownActorData, ActorType, ActorNameType } from "@textactor/actor-domain";
+import { SaveActor, BuildActorParams, ActorType, ActorNameType } from "@textactor/actor-domain";
 import { NameHelper } from "@textactor/domain";
 import { getGenerateOptions } from './generate-options';
 import {
-    DataContainer,
-    Actor as ConceptActor,
     WikiEntity as ConceptWikiEntity,
     WikiEntityType as ConceptWikiEntityType,
-    ContainerExplorerOptions,
-} from "textactor-explorer";
-import { CreatingWikiEntityData, WikiEntity, WikiEntityHelper, WikiEntityType } from "@textactor/wikientity-domain";
+    ConceptContainer,
+} from "@textactor/concept-domain";
+import { WikiEntity, WikiEntityHelper, WikiEntityType, BuildWikiEntityParams } from "@textactor/wikientity-domain";
 import logger from "./logger";
 import { delay } from "./utils";
+import {
+    ContainerExplorerOptions,
+    ExplorerApi,
+    Actor as ConceptActor,
+} from "@textactor/actors-explorer";
 
-export function generateActors(container: DataContainer, options?: ContainerExplorerOptions) {
+export function generateActors(explorerApi: ExplorerApi, container: ConceptContainer, options: ContainerExplorerOptions) {
 
     options = options || getGenerateOptions(container.country);
 
-    const explorer = textactorExplorer.newExplorer(container.id, options);
+    const explorer = explorerApi.createContainerExplorer(container.id, options);
 
     const saveActor = new SaveActor(actorRepository, actorNameRepository);
     let countAdded = 0;
@@ -71,7 +73,7 @@ export function generateActors(container: DataContainer, options?: ContainerExpl
 }
 
 function saveWikiEntity(conceptEntity: ConceptWikiEntity): Promise<WikiEntity> {
-    const knownData: CreatingWikiEntityData = {
+    const knownData: BuildWikiEntityParams = {
         wikiDataId: conceptEntity.wikiDataId,
         wikiPageId: conceptEntity.wikiPageId,
         wikiPageTitle: conceptEntity.wikiPageTitle,
@@ -87,7 +89,7 @@ function saveWikiEntity(conceptEntity: ConceptWikiEntity): Promise<WikiEntity> {
         countLinks: Object.keys(conceptEntity.links).length,
     };
 
-    const entity = WikiEntityHelper.create(knownData);
+    const entity = WikiEntityHelper.build(knownData);
 
     return wikiEntityRepository.createOrUpdate(entity);
 }
@@ -126,7 +128,7 @@ function conceptActorToActor(conceptActor: ConceptActor) {
     if (!conceptActor.wikiEntity) {
         throw new Error(`No conceptActor.wikiEntity`);
     }
-    const actorData: KnownActorData = {
+    const actorData: BuildActorParams = {
         name: conceptActor.name,
         names: conceptActor.names.map(item => ({ name: item.name, popularity: item.popularity, type: item.type as ActorNameType })),
         country: conceptActor.country,

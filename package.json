@@ -37,7 +37,8 @@
   },
   "homepage": "https://Mitea@bitbucket.org/entitizer/actors-generator#readme",
   "devDependencies": {
-    "@types/node": "^10.12.3",
+    "@types/mongodb": "^3.1.14",
+    "@types/node": "^10.12.5",
     "@types/node-fetch": "^2.1.2",
     "ava": "^0.25.0",
     "dotenv": "^6.1.0",
@@ -45,10 +46,11 @@
     "typescript": "3.1.6"
   },
   "dependencies": {
-    "@textactor/domain": "^0.1.7",
-    "@textactor/wikientity-domain": "^0.1.2",
     "ascrape": "^0.2.0",
+    "aws-sdk": "^2.353.0",
+    "mongodb": "^3.1.9",
     "node-fetch": "^2.2.1",
+    "ournet.data.news": "^0.3.6",
     "ournet.logger": "^0.1.0"
   }
 }

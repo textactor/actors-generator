@@ -8,4 +8,4 @@ PAST_DAYS=10 PERIOD=4 LOCALE=ro-ro yarn collect
 
 LOCALE=ro-ro yarn generate
 
-LOCALE=ro-ro yarn generate-from-queries
+#LOCALE=ro-ro yarn generate-from-queries

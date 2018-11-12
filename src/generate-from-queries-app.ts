@@ -11,14 +11,14 @@ if (!locale) {
 
 import logger from './logger';
 
-import { initData, close } from "./data";
+import { create, close } from "./data";
 import { generateFromQueries } from "./generate-from-queries";
 
 async function start() {
     logger.warn(`START collect-concepts-from-queries ${locale.lang}-${locale.country}`);
-    await initData();
+    const explorer = await create();
 
-    return generateFromQueries(locale, process.env.FILE);
+    return generateFromQueries(explorer, locale, process.env.FILE);
 }
 
 start()

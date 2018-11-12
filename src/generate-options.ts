@@ -1,4 +1,4 @@
-import { ContainerExplorerOptions } from "textactor-explorer";
+import { ContainerExplorerOptions } from "@textactor/actors-explorer";
 
 const GENERATE_ALL_CONCEPTS = process.env.GENERATE_ALL_CONCEPTS || '';
 
