@@ -1,9 +1,9 @@
 
-import { IConceptEnumerator } from "./concept-enumerator";
+import { TextEnumerator } from "./text-enumerator";
 const debug = require('debug')('actors-generator');
 const articleScrape = require('ascrape');
 
-export class WebsiteConceptEnumerator implements IConceptEnumerator {
+export class WebsiteTextEnumerator implements TextEnumerator {
     currentId: number
     constructor(private options: { startId: number, endId: number, url: string }) {
         if (!options.url.includes('ID')) {
@@ -23,7 +23,7 @@ export class WebsiteConceptEnumerator implements IConceptEnumerator {
         debug('startId=', startId)
         debug('endId=', endId)
 
-        return new WebsiteConceptEnumerator({ startId, endId, url });
+        return new WebsiteTextEnumerator({ startId, endId, url });
     }
 
     next(): Promise<string[]> {

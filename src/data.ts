@@ -30,10 +30,12 @@ import {
     WikiEntityRepositoryBuilder as ConceptWikiEntityRepositoryBuilder,
     WikiSearchNameRepositoryBuilder,
     WikiTitleRepositoryBuilder,
+    LearningTextRepositoryBuilder,
 } from '@textactor/concept-data';
 
 import DynamoDB = require('aws-sdk/clients/dynamodb');
 import { MongoClient } from 'mongodb';
+import { LearningTextRepository } from '@textactor/concept-domain';
 
 const dynamoDbClient = new DynamoDB.DocumentClient();
 
@@ -42,6 +44,7 @@ export const actorRepository = ActorRepositoryBuilder.build(dynamoDbClient);
 export const wikiEntityRepository = WikiEntityRepositoryBuilder.build(dynamoDbClient);
 
 let mongoClient: MongoClient;
+export let learningTextRepository: LearningTextRepository;
 
 export async function create() {
     mongoClient = await MongoClient.connect(DB_CONNECTION);
@@ -52,6 +55,8 @@ export async function create() {
     const conceptWikiEntityRepository = ConceptWikiEntityRepositoryBuilder.build(mongoDb);
     const wikiSearchNameRepository = WikiSearchNameRepositoryBuilder.build(mongoDb);
     const wikiTitleRepository = WikiTitleRepositoryBuilder.build(mongoDb);
+
+    learningTextRepository = LearningTextRepositoryBuilder.build(mongoDb);
 
     await Promise.all([
         actorNameRepository.createStorage(),

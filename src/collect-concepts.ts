@@ -1,10 +1,10 @@
 
 const debug = require('debug')('actors-generator');
 
-import { IConceptEnumerator } from "./concept-enumerator";
+import { TextEnumerator } from "./text-enumerator";
 import { DataCollector } from "@textactor/actors-explorer";
 
-export async function collectConcepts(collector: DataCollector, enumerator: IConceptEnumerator) {
+export async function collectConcepts(collector: DataCollector, enumerator: TextEnumerator) {
     let countTexts = 0;
     debug(`Start collectConcepts`)
     function start(): Promise<any> {
@@ -18,7 +18,9 @@ export async function collectConcepts(collector: DataCollector, enumerator: ICon
                 return;
             }
             for (let text of texts) {
+                // debug('pre push text');
                 await collector.pushText(text);
+                // debug('post push text');
             }
             return start();
         });

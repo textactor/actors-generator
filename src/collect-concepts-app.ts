@@ -15,9 +15,9 @@ import logger from './logger';
 
 import { collectConcepts } from "./collect-concepts";
 import { create, close } from "./data";
-import { WebsiteConceptEnumerator } from './website-concept-enumerator';
-import { DBConceptEnumerator } from './db-concept-enumerator';
-import { IConceptEnumerator } from './concept-enumerator';
+import { WebsiteTextEnumerator } from './website-text-enumerator';
+import { DbTextEnumerator } from './db-text-enumerator';
+import { TextEnumerator } from './text-enumerator';
 
 async function start() {
     logger.warn(`START collect-concepts ${locale.lang}-${locale.country}`);
@@ -35,11 +35,11 @@ async function start() {
     await close();
 }
 
-function createEnumerator(): IConceptEnumerator {
+function createEnumerator(): TextEnumerator {
     if (~['website', 'site'].indexOf(sourceName)) {
-        return WebsiteConceptEnumerator.createFromEnv();
+        return WebsiteTextEnumerator.createFromEnv();
     }
-    return DBConceptEnumerator.createFromEnv(locale);
+    return DbTextEnumerator.createFromEnv(locale);
 }
 
 start()
