@@ -36,6 +36,8 @@ import {
 import DynamoDB = require('aws-sdk/clients/dynamodb');
 import { MongoClient } from 'mongodb';
 import { LearningTextRepository } from '@textactor/concept-domain';
+import { LocaleCountryTagsService } from './country-tags-service';
+import { KnownNameService } from '@textactor/known-names';
 
 const dynamoDbClient = new DynamoDB.DocumentClient();
 
@@ -75,6 +77,8 @@ export async function create() {
         entityRep: conceptWikiEntityRepository,
         searchNameRep: wikiSearchNameRepository,
         wikiTitleRep: wikiTitleRepository,
+        countryTagsService: new LocaleCountryTagsService(),
+        knownNameService: new KnownNameService(),
     })
 }
 
