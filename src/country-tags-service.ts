@@ -12,6 +12,7 @@ export class LocaleCountryTagsService implements CountryTagsService {
 const LOCALE_COUNTRY_TAGS: { [country: string]: { [lang: string]: string[] } } = {
     md: {
         ro: ['republica moldova', 'moldova'],
+        ru: ['Молдавия', 'Молдова', 'Молдовы', 'Молдовой', 'Молдову', 'Молдове', 'Молдавии', 'Молдавией', 'Молдавию'],
     },
     ro: {
         ro: ['românia', 'româniei'],
