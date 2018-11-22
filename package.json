@@ -48,7 +48,7 @@
   "dependencies": {
     "@textactor/actor-data": "^0.2.0",
     "@textactor/actor-domain": "^0.2.0",
-    "@textactor/actors-explorer": "^0.1.1",
+    "@textactor/actors-explorer": "^0.1.2",
     "@textactor/concept-data": "^0.2.0",
     "@textactor/concept-domain": "^0.2.0",
     "@textactor/domain": "^0.2.0",
