@@ -89,6 +89,10 @@ function saveWikiEntity(conceptEntity: ConceptWikiEntity): Promise<WikiEntity> {
         countLinks: Object.keys(conceptEntity.links).length,
     };
 
+    if (knownData.aliases) {
+        knownData.aliases = knownData.aliases.filter(item => item.trim().length > 1);
+    }
+
     const entity = WikiEntityHelper.build(knownData);
 
     return wikiEntityRepository.createOrUpdate(entity);
