@@ -35,7 +35,15 @@ import {
 
 import DynamoDB = require('aws-sdk/clients/dynamodb');
 import { MongoClient } from 'mongodb';
-import { LearningTextRepository } from '@textactor/concept-domain';
+import {
+    LearningTextRepository,
+    ConceptContainerValidator,
+    WikiEntityValidator as ConceptWikiEntityValidator,
+    WikiSearchNameValidator,
+    WikiTitleValidator,
+    LearningTextValidator,
+    ConceptValidator,
+} from '@textactor/concept-domain';
 import { LocaleCountryTagsService } from './country-tags-service';
 import { KnownNameService } from '@textactor/known-names';
 
@@ -52,13 +60,13 @@ export async function create() {
     mongoClient = await MongoClient.connect(DB_CONNECTION);
     const mongoDb = mongoClient.db();
 
-    const conceptContainerRepository = ConceptContainerRepositoryBuilder.build(mongoDb);
-    const conceptRepository = ConceptRepositoryBuilder.build(mongoDb);
-    const conceptWikiEntityRepository = ConceptWikiEntityRepositoryBuilder.build(mongoDb);
-    const wikiSearchNameRepository = WikiSearchNameRepositoryBuilder.build(mongoDb);
-    const wikiTitleRepository = WikiTitleRepositoryBuilder.build(mongoDb);
+    const conceptContainerRepository = ConceptContainerRepositoryBuilder.build(mongoDb, new ConceptContainerValidator());
+    const conceptRepository = ConceptRepositoryBuilder.build(mongoDb, new ConceptValidator());
+    const conceptWikiEntityRepository = ConceptWikiEntityRepositoryBuilder.build(mongoDb, new ConceptWikiEntityValidator());
+    const wikiSearchNameRepository = WikiSearchNameRepositoryBuilder.build(mongoDb, new WikiSearchNameValidator());
+    const wikiTitleRepository = WikiTitleRepositoryBuilder.build(mongoDb, new WikiTitleValidator());
 
-    learningTextRepository = LearningTextRepositoryBuilder.build(mongoDb);
+    learningTextRepository = LearningTextRepositoryBuilder.build(mongoDb, new LearningTextValidator());
 
     await Promise.all([
         actorNameRepository.createStorage(),
