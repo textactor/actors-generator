@@ -9,6 +9,9 @@ export class DbTextEnumerator implements TextEnumerator {
     limit = 1000;
 
     constructor(private locale: Locale) {
+        if (['ru'].includes(locale.lang)) {
+            this.limit = 2000;
+        }
     }
 
     next(): Promise<string[]> {
