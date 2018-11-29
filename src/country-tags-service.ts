@@ -20,4 +20,7 @@ const LOCALE_COUNTRY_TAGS: { [country: string]: { [lang: string]: string[] } } =
     ru: {
         ru: ['Россия', 'РФ', 'России', 'Российской'],
     },
+    bg: {
+        bg: ['България', 'Българите'],
+    },
 }
