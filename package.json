@@ -52,7 +52,7 @@
     "@textactor/concept-data": "^0.2.1",
     "@textactor/concept-domain": "^0.2.1",
     "@textactor/domain": "^0.2.0",
-    "@textactor/known-names": "^0.1.1",
+    "@textactor/known-names": "^0.1.2",
     "@textactor/wikientity-data": "^0.2.0",
     "@textactor/wikientity-domain": "^0.2.0",
     "ascrape": "^0.2.0",
