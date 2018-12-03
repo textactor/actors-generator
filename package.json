@@ -15,8 +15,8 @@
     "preversion": "yarn run tsc",
     "postversion": "git push --follow-tags",
     "prepublishOnly": "yarn run tsc && yarn run clean-test-code",
-    "clean": "rimraf ./lib && rimraf ./types",
-    "clean-test-code": "rimraf ./lib/**/*.test.js && rimraf ./types/**/*.test.d.ts",
+    "clean": "rimraf ./lib",
+    "clean-test-code": "rimraf ./lib/**/*.test.js",
     "dev": "sh dev.sh"
   },
   "engines": {

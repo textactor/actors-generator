@@ -23,4 +23,7 @@ const LOCALE_COUNTRY_TAGS: { [country: string]: { [lang: string]: string[] } } =
     bg: {
         bg: ['България', 'Българите'],
     },
+    in: {
+        en: ['India', 'Indian', 'Indians'],
+    },
 }
