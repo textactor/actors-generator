@@ -26,4 +26,13 @@ const LOCALE_COUNTRY_TAGS: { [country: string]: { [lang: string]: string[] } } =
     in: {
         en: ['India', 'Indian', 'Indians'],
     },
+    it: {
+        it: ['Italia', 'Italiana', 'italiano'],
+    },
+    cz: {
+        cs: ['Česko', 'ČR', 'Česká', 'České', 'Česku', 'České'],
+    },
+    hu: {
+        hu: ['Magyarország', 'Magyarországot', 'Magyarországon', 'magyarországi', 'Magyarországnak', 'Magyarországra', 'Magyarországgal'],
+    },
 }
