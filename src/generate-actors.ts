@@ -35,18 +35,11 @@ export function generateActors(explorerApi: ExplorerApi, container: ConceptConta
     const onActor = async (conceptActor: ConceptActor) => {
         if (!isValidActor(conceptActor)) {
             debug(`---   Invalid actor: ${conceptActor.name}, wiki=${!!conceptActor.wikiEntity}`);
-            if (['Moscow', 'Россия', 'России', 'Москва', 'Москве', 'Москвы'].includes(conceptActor.name)) {
-                logger.warn(`Invalid actor: ${conceptActor.name}`, conceptActor);
-            }
             return;
         }
-        // conceptActor.
+
         const actor = conceptActorToActor(conceptActor);
         debug(`+++   Adding new actor: ${actor.name}`);
-
-        if (['Moscow', 'Россия', 'России', 'Москва', 'Москве', 'Москвы'].includes(actor.name)) {
-            logger.warn(`Adding new actor: ${actor.name}`, actor);
-        }
 
         countAdded++;
 
