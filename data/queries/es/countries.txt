@@ -1,0 +1,6 @@
+PREFIX schema: <http://schema.org/>
+
+SELECT ?item ?itemTitle WHERE {
+  ?item wdt:P31 wd:Q6256.
+  ?sitelink schema:isPartOf <https://es.wikipedia.org/>;schema:about ?item;schema:name ?itemTitle.
+}

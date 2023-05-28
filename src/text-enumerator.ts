@@ -1,4 +1,3 @@
-
 export interface TextEnumerator {
-    next(): Promise<string[]>
+  next(): Promise<string[]>;
 }

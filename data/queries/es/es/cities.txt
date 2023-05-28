@@ -1,0 +1,21 @@
+PREFIX schema: <http://schema.org/>
+
+SELECT ?item ?itemTitle WHERE {
+  ?item wdt:P31 wd:Q515.
+  { ?item wdt:P17 wd:Q29. }
+  UNION
+  { ?item wdt:P17 wd:Q142. }
+  UNION
+  { ?item wdt:P17 wd:Q183. }
+  UNION
+  { ?item wdt:P17 wd:Q159. }
+  UNION
+  { ?item wdt:P17 wd:Q212. }
+  UNION
+  { ?item wdt:P17 wd:Q219. }
+  UNION
+  { ?item wdt:P17 wd:Q28. }
+  UNION
+  { ?item wdt:P17 wd:Q403. }
+  ?sitelink schema:isPartOf <https://es.wikipedia.org/>;schema:about ?item;schema:name ?itemTitle.
+}
